@@ -4,8 +4,7 @@ const textShadowSpectrum = [
   'rgba(0, 0, 0, 0.1) 0px 10px 2px',
   'rgba(0, 0, 0, 0.1) 0px 34px 30px',
 ];
-const reducer = (accumulator, current) => accumulator + current;
-const textShadow = textShadowSpectrum.reduce(reducer, '');
+const textShadow = textShadowSpectrum.reduce((a, c) => a + c, '');
 
 const headerStyle = {
   color: '#fff',

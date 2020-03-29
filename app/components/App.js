@@ -1,4 +1,7 @@
+import fs from 'fs';
+import path from 'path';
 import React, { Component } from 'react';
+import sizeOf from 'image-size';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 
 import Header from './Header';
@@ -7,15 +10,11 @@ import Loading from './Loading';
 import PageViewer from './PageViewer';
 import theme from './theme';
 
+import encodePath from '../modules/encodePath';
 import File from '../modules/File';
-import encodepath from '../modules/encodepath';
 import turnPage from '../modules/turnPage';
 import { generateCenterfolds } from '../modules/generate';
-import { strainOnlyComics } from '../modules/strain';
-
-const fs = require('fs');
-const path = require('path');
-const sizeOf = require('image-size');
+import { strainComics } from '../modules/strain';
 
 export default class App extends Component {
   state = {
@@ -117,7 +116,7 @@ export default class App extends Component {
     isLoading: false,
 
     // Image cache
-    images: [],
+    images: [], // eslint-disable-line react/no-unused-state
   };
 
   componentDidMount() {
@@ -130,7 +129,7 @@ export default class App extends Component {
       const shouldTurn = isComicActive && !isActiveElemInput;
 
       if (shouldTurn) {
-        this.arrowKeyTurnPage(e.code, shouldTurn);
+        this.arrowKeyTurnPage(e.code);
       }
     });
   }
@@ -158,7 +157,7 @@ export default class App extends Component {
   determineAvailableAdjComic = (err, files, polarity) => {
     const { openedComic } = this.state;
     const originDirname = path.dirname(openedComic.origin);
-    const strainedComics = strainOnlyComics(files);
+    const strainedComics = strainComics(files);
     const index = strainedComics.indexOf(openedComic.name);
     const newIndex = index + polarity;
     if (newIndex > -1 && newIndex < strainedComics.length) {
@@ -198,7 +197,7 @@ export default class App extends Component {
         const temp = openedComic.tempdir;
         const pageKey = openedComic.pages[key];
         const pagePath = path.join(temp, pageKey);
-        const page = encodepath(pagePath);
+        const page = encodePath(pagePath);
         const { width, height } = sizeOf(pagePath);
         const ratio =
           key === newPageIndex ? 1 : encodedPages[0].height / height;
@@ -233,17 +232,16 @@ export default class App extends Component {
       img.src = page.encodedPagePath;
       return img;
     });
-    this.setState({ images });
+    this.setState({ images }); // eslint-disable-line react/no-unused-state
   };
 
   mapPages = (files, tempdir) =>
     files.map((file, key) => {
       const pagePath = path.join(tempdir, file);
-      const encodedPagePath = encodepath(pagePath);
       return {
-        pagePath,
-        encodedPagePath,
+        encodedPagePath: encodePath(pagePath),
         key,
+        pagePath,
       };
     });
 
@@ -394,23 +392,19 @@ export default class App extends Component {
 
     console.log(openedComic);
     if (openedComic.name.length > 0) {
-      turnPage(
+      const { newPageIndex, pagesToDisplay } = turnPage({
         currentPageIndex,
         centerfolds,
         pageCount,
-        pages.length,
+        pages,
         polarity,
-        (newPageIndex, pagesToDisplay) => {
-          this.setCurrentPages(newPageIndex, pagesToDisplay);
-        },
-      );
+      });
+      this.setCurrentPages(newPageIndex, pagesToDisplay);
     }
   };
 
   turnPageLeft = () => {
     const polarity = -1;
-    console.log('turnPageLeft');
-    console.log(this.shouldPageTurnLeft());
     if (this.shouldPageTurnLeft()) {
       this.turnPage(polarity);
     }
@@ -418,15 +412,12 @@ export default class App extends Component {
 
   turnPageRight = () => {
     const polarity = 1;
-    console.log('turnPageRight');
-    console.log(this.shouldPageTurnRight());
     if (this.shouldPageTurnRight()) {
       this.turnPage(polarity);
     }
   };
 
   render() {
-    console.log('Main (state):', this.state);
     const {
       buttons,
       content,

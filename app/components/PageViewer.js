@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
 import DragScroll from 'react-dragscroll';
 import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 
-import Page from './Page';
+import generatePages from './generatePages';
 
 class PageViewer extends Component {
   state = {
@@ -18,7 +18,7 @@ class PageViewer extends Component {
     const pageViewer = document.querySelector('.PageViewer');
     // const pageWrapper = document.getElementById('pageWrapper');
 
-    if (this.areTherePageProps()) {
+    if (pages.length > 0) {
       if (currentComicPage !== pages[0].page) {
         pageViewer.scrollLeft = 0;
         pageViewer.scrollTop = 0;
@@ -54,31 +54,9 @@ class PageViewer extends Component {
     }
   }
 
-  areTherePageProps = () => {
-    const { pages } = this.props;
-    return Array.isArray(pages) && pages.length > 0;
-  };
-
   render() {
-    console.log('PageViewer:', this.props);
+    // console.log('PageViewer:', this.props);
     const { pages, zoomLevel } = this.props;
-    let totalSize = 0;
-    let newPages = null;
-
-    const increaseTotalSize = (page) => {
-      totalSize += page.width;
-    };
-
-    if (this.areTherePageProps()) {
-      pages.forEach(increaseTotalSize);
-      newPages = pages.map((item) => {
-        const { key, page, width } = item;
-        const ratio = width / totalSize;
-        return (
-          <Page key={key} width={ratio * 100} alt="comic page" src={page} />
-        );
-      });
-    }
 
     return (
       <DragScroll className="PageViewer dragscroll">
@@ -91,7 +69,7 @@ class PageViewer extends Component {
             width: `${zoomLevel}%`,
           }}
         >
-          {newPages}
+          {generatePages({ pages })}
         </div>
       </DragScroll>
     );
@@ -99,9 +77,18 @@ class PageViewer extends Component {
 }
 
 PageViewer.propTypes = {
-  comic: PropTypes.object.isRequired, // eslint-disable-line
-  pages: PropTypes.array, // eslint-disable-line
+  pages: PropTypes.arrayOf(
+    PropTypes.shape({
+      key: PropTypes.any,
+      page: PropTypes.string,
+      width: PropTypes.number,
+    }),
+  ),
   zoomLevel: PropTypes.number.isRequired,
+};
+
+PageViewer.defaultProps = {
+  pages: [],
 };
 
 export default PageViewer;

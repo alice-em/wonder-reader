@@ -1,41 +1,27 @@
 // strain.js cleans out the dirty files, like .DS_Store
-const { copyArray } = require('./copyData');
-const isDirectory = require('is-directory');
 const path = require('path');
 
 const polaritySort = require('../modules/polaritySort.js');
+const { copyArray } = require('../modules/copyData');
 
 const comicTypes = ['.cbr', '.cbz'];
 const imageTypes = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp'];
 
-const isSomething = types => (filename) => {
-  const extname = path.extname(filename).toLowerCase();
-  return types.includes(extname);
-};
+// Determiner Functions
+const isSomething = types => filename =>
+  types.includes(path.extname(filename).toLowerCase());
 
 const isComic = isSomething(comicTypes);
 const isImage = isSomething(imageTypes);
 
-const sortArrayByAlpha = (ARRAY) => {
-  const newARRAY = copyArray(ARRAY);
-  newARRAY.sort((a, b) => polaritySort(a, b));
-  return newARRAY;
-};
+// Array Functions
+const isFileAFileType = fileTypes => file =>
+  fileTypes.includes(path.extname(file));
+const sortArrayByAlpha = ARRAY => copyArray(ARRAY).sort(polaritySort);
 
 // Cleans out non image files from ARRAY
-const strainer = (ARRAY, dirname) => (fileTypes) => {
-  function isProperFileType(file) {
-    const extname = path.extname(file);
-    const isThisAProperFileType = fileTypes.includes(extname.toLowerCase());
-    if (dirname) {
-      const filepath = path.join(dirname, file);
-      return isThisAProperFileType || isDirectory.sync(filepath);
-    }
-    return isThisAProperFileType;
-  }
-  const newARRAY = ARRAY.filter((x, i) => isProperFileType(x, i));
-  return sortArrayByAlpha(newARRAY);
-};
+const strainer = fileTypes => files =>
+  files.filter(isFileAFileType(fileTypes)).sort(polaritySort);
 
 const strainComics = strainer(comicTypes);
 const strainOnlyComics = strainer(comicTypes);

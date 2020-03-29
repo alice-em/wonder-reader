@@ -77,7 +77,7 @@ describe('main window', function spec() {
     expect(await findCounter().getText()).toBe('0');
   });
 
-  it('shouldnt change if even and if odd button clicked', async () => {
+  it("shouldn't change if even and if odd button clicked", async () => {
     const { client } = this.app;
 
     const buttons = await findButtons();
