@@ -1,32 +1,31 @@
 const os = require('os');
 const path = require('path');
 
-const encodeUnix = (tempPath) => {
+const encodeUnix = (filepath) => {
+  const tempPath = filepath.split(path.sep);
+
   let newPath = '';
   for (let j = 0; j < tempPath.length; j += 1) {
     newPath = path.join(newPath, encodeURIComponent(tempPath[j]));
   }
-  newPath = `/${newPath}`; // To set root folder
-  newPath = newPath.replace(/'/g, "\\'"); // Fixes err with the character \'
-  return newPath;
+  return `/${newPath}`.replace(/'/g, "\\'"); // To set root folder && Fixes err with the character \'
 };
 
-const encodeWin = (tempPath) => {
+const encodeWin = (filepath) => {
+  const tempPath = filepath.split(path.sep);
+
   let newPath = '';
   // Saves letter drive information
-  const c = tempPath[0]; // eslint-disable-line
+  const driveLetter = tempPath[0];
   for (let j = 1; j < tempPath.length; j += 1) {
     newPath = path.join(newPath, encodeURIComponent(tempPath[j]));
   }
-  newPath = path.join(c, newPath); // returns c:\path\to\file.cbz
-  return newPath;
+  return path.join(driveLetter, newPath); // returns c:\path\to\file.cbz
 };
 
 // Encodes each folder, then merging it all together
-const encodePath = (filepath) => {
-  const tempPath = filepath.split(path.sep);
-  return os.platform === 'win32' ? encodeWin(tempPath) : encodeUnix(tempPath);
-};
+const encodePath = filepath =>
+  os.platform === 'win32' ? encodeWin(filepath) : encodeUnix(filepath);
 
-export { encodeUnix };
+export { encodeUnix, encodeWin };
 export default encodePath;
