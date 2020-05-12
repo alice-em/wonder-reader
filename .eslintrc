@@ -21,6 +21,7 @@
     "import/no-unresolved": "error",
     "jsx-a11y/anchor-is-valid": "off",
     "no-console": "warn",
+    "import/no-named-as-default": "off",
     "no-multi-assign": "warn",
     "no-use-before-define": "error",
     "promise/always-return": "error",

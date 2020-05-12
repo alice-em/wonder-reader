@@ -1,0 +1,359 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LibraryItem should render 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <LibraryItem
+    basename="basename"
+    dirname="dirname"
+    id="id"
+    isDirectory={true}
+    onRowClick={[MockFunction]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": "id",
+    "nodeType": "class",
+    "props": Object {
+      "children": Array [
+        <WithStyles(TableCell)
+          numeric={true}
+          padding="checkbox"
+          style={
+            Object {
+              "width": "10px",
+            }
+          }
+        >
+          <LibraryItemIcon
+            iconSize={30}
+            isDirectory={true}
+          />
+        </WithStyles(TableCell)>,
+        <WithStyles(TableCell)
+          style={
+            Object {
+              "color": "#333",
+            }
+          }
+        >
+          basename
+        </WithStyles(TableCell)>,
+        <WithStyles(TableCell)
+          numeric={true}
+          style={
+            Object {
+              "color": "#bbb",
+            }
+          }
+        >
+          dirname
+        </WithStyles(TableCell)>,
+        <WithStyles(TableCell)
+          padding="checkbox"
+          style={
+            Object {
+              "width": "10px",
+            }
+          }
+        >
+          <FaPercent
+            style={
+              Object {
+                "color": "#999",
+                "fontSize": "14px",
+              }
+            }
+          />
+        </WithStyles(TableCell)>,
+      ],
+      "className": "library-item",
+      "onClick": [MockFunction],
+      "style": Object {
+        "cursor": "pointer",
+        "fontFamily": "Montserrat",
+        "fontSize": "20px",
+      },
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": <LibraryItemIcon
+            iconSize={30}
+            isDirectory={true}
+          />,
+          "numeric": true,
+          "padding": "checkbox",
+          "style": Object {
+            "width": "10px",
+          },
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "iconSize": 30,
+            "isDirectory": true,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": "basename",
+          "style": Object {
+            "color": "#333",
+          },
+        },
+        "ref": null,
+        "rendered": "basename",
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": "dirname",
+          "numeric": true,
+          "style": Object {
+            "color": "#bbb",
+          },
+        },
+        "ref": null,
+        "rendered": "dirname",
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": <FaPercent
+            style={
+              Object {
+                "color": "#999",
+                "fontSize": "14px",
+              }
+            }
+          />,
+          "padding": "checkbox",
+          "style": Object {
+            "width": "10px",
+          },
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "style": Object {
+              "color": "#999",
+              "fontSize": "14px",
+            },
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        "type": [Function],
+      },
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": "id",
+      "nodeType": "class",
+      "props": Object {
+        "children": Array [
+          <WithStyles(TableCell)
+            numeric={true}
+            padding="checkbox"
+            style={
+              Object {
+                "width": "10px",
+              }
+            }
+          >
+            <LibraryItemIcon
+              iconSize={30}
+              isDirectory={true}
+            />
+          </WithStyles(TableCell)>,
+          <WithStyles(TableCell)
+            style={
+              Object {
+                "color": "#333",
+              }
+            }
+          >
+            basename
+          </WithStyles(TableCell)>,
+          <WithStyles(TableCell)
+            numeric={true}
+            style={
+              Object {
+                "color": "#bbb",
+              }
+            }
+          >
+            dirname
+          </WithStyles(TableCell)>,
+          <WithStyles(TableCell)
+            padding="checkbox"
+            style={
+              Object {
+                "width": "10px",
+              }
+            }
+          >
+            <FaPercent
+              style={
+                Object {
+                  "color": "#999",
+                  "fontSize": "14px",
+                }
+              }
+            />
+          </WithStyles(TableCell)>,
+        ],
+        "className": "library-item",
+        "onClick": [MockFunction],
+        "style": Object {
+          "cursor": "pointer",
+          "fontFamily": "Montserrat",
+          "fontSize": "20px",
+        },
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": <LibraryItemIcon
+              iconSize={30}
+              isDirectory={true}
+            />,
+            "numeric": true,
+            "padding": "checkbox",
+            "style": Object {
+              "width": "10px",
+            },
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "iconSize": 30,
+              "isDirectory": true,
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": "basename",
+            "style": Object {
+              "color": "#333",
+            },
+          },
+          "ref": null,
+          "rendered": "basename",
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": "dirname",
+            "numeric": true,
+            "style": Object {
+              "color": "#bbb",
+            },
+          },
+          "ref": null,
+          "rendered": "dirname",
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": <FaPercent
+              style={
+                Object {
+                  "color": "#999",
+                  "fontSize": "14px",
+                }
+              }
+            />,
+            "padding": "checkbox",
+            "style": Object {
+              "width": "10px",
+            },
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "style": Object {
+                "color": "#999",
+                "fontSize": "14px",
+              },
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          "type": [Function],
+        },
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;

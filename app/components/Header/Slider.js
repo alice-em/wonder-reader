@@ -1,8 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-const boxShadow =
-  'inset rgb(135, 169, 214) 0px 3px 0px, inset rgba(0, 0, 0, 0.15) 0px 10px 10px';
+import SliderInput from '../SliderInput';
+
+const boxShadow = [
+  'inset rgb(135, 169, 214) 0px 3px 0px',
+  'inset rgba(0, 0, 0, 0.15) 0px 10px 10px',
+].join(', ');
 
 const styles = {
   Slider: {
@@ -26,11 +30,19 @@ const styles = {
   },
 };
 
+const sliderComponent = document.getElementById('sliderComponent');
+
 class Slider extends Component {
   componentDidMount() {
-    document
-      .getElementById('sliderComponent')
-      .addEventListener('mouseleave', this.blurSliderInput);
+    if (sliderComponent) {
+      sliderComponent.addEventListener('mouseleave', this.blurSliderInput);
+    }
+  }
+
+  componentWillUnmount() {
+    if (sliderComponent) {
+      sliderComponent.removeEventListener('mouseleave', this.blurSliderInput);
+    }
   }
 
   blurSliderInput = () => {
@@ -40,24 +52,16 @@ class Slider extends Component {
   onChange = (e) => {
     const { onChange } = this.props;
     const { value } = e.target;
-    console.log(value);
+    // console.log(value);
     onChange(value);
   };
 
   render() {
     const { value } = this.props;
+
     return (
       <div className="slider" id="sliderComponent" style={styles.Slider}>
-        <input
-          id="SliderInput"
-          min="25"
-          max="200"
-          name="slider"
-          onChange={this.onChange}
-          type="range"
-          value={value}
-          style={styles.wide}
-        />
+        <SliderInput onChange={this.onChange} value={value} />
         <div className="zoomLevel" style={styles.zoomLevel}>
           {value}
         </div>

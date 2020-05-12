@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
 import Drawer from '@material-ui/core/Drawer';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import React, { Component } from 'react';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 import LibraryLayout from './LibraryLayout';
 
@@ -28,52 +28,38 @@ class Library extends Component {
     this.setState({ root: filepath });
   };
 
-  renderDrawer = () => {
-    const { closeDrawer, open } = this.props;
-
-    return (
-      <Drawer
-        anchor="top"
-        open={open}
-        onClose={closeDrawer}
-        PaperProps={{ style: styles.PaperProps }}
-        variant="temporary"
-        transitionDuration={125}
-      >
-        <div tabIndex={0} role="button" onKeyDown={closeDrawer}>
-          {this.renderLibraryLayout()}
-        </div>
-      </Drawer>
-    );
-  };
-
-  renderLibraryLayout = () => {
+  render() {
     const {
       classes,
       closeDrawer,
+      open,
       openComic,
       saveContentDataToMain,
+      style,
     } = this.props;
     const { root } = this.state;
 
     return (
-      <LibraryLayout
-        className={classes.list}
-        closeLibrary={closeDrawer}
-        openComic={openComic}
-        root={root}
-        saveContentDataToParent={saveContentDataToMain}
-        updateRoot={this.updateRoot}
-      />
-    );
-  };
-
-  render() {
-    const { style } = this.props;
-
-    return (
       <div className="Library" style={style}>
-        {this.renderDrawer()}
+        <Drawer
+          anchor="top"
+          open={open}
+          onClose={closeDrawer}
+          PaperProps={{ style: styles.PaperProps }}
+          variant="temporary"
+          transitionDuration={125}
+        >
+          <div tabIndex={0} role="button" onKeyDown={closeDrawer}>
+            <LibraryLayout
+              className={classes.list}
+              closeLibrary={closeDrawer}
+              openComic={openComic}
+              root={root}
+              saveContentDataToParent={saveContentDataToMain}
+              updateRoot={this.updateRoot}
+            />
+          </div>
+        </Drawer>
       </div>
     );
   }
@@ -94,4 +80,5 @@ Library.propTypes = {
   style: PropTypes.objectOf(PropTypes.object.isRequired),
 };
 
+export { Library };
 export default withStyles(styles)(Library);

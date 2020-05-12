@@ -1,14 +1,16 @@
 import IconButton from '@material-ui/core/IconButton';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import electron from 'electron';
 import { FaClose, FaFolderOpen, FaLevelUp } from 'react-icons/lib/fa';
 
 import LibraryHeader from './LibraryHeader';
 import LibraryTable from './LibraryTable';
 
 const { copyDeepObject } = require('../modules/copyData.js');
-const { dialog } = require('electron').remote;
 const { generateNestedContentFromFilepath } = require('../modules/generate.js');
+
+const { dialog } = electron.remote ? electron.remote : electron;
 
 const styles = {
   closeButton: {
@@ -23,16 +25,17 @@ const styles = {
 
 class LibraryLayout extends Component {
   state = {
-    id: 'libraryRoot',
     basename: '',
     bookmark: '',
+    contents: [],
     dirname: '',
     fullpath: null,
+    id: 'libraryRoot',
     isDirectory: true,
     root: '',
-    contents: [],
   };
 
+  /* istanbul ignore next */
   componentDidMount() {
     const { root } = this.props;
     if (root) {
@@ -40,90 +43,23 @@ class LibraryLayout extends Component {
     }
   }
 
+  /* istanbul ignore next */
   componentWillUnmount() {
     this.props.saveContentDataToParent(this.state);
   }
 
-  renderButtons = () => (
-    <div>
-      {this.renderFolderOpen()}
-      {this.renderLevelUp()}
-      {this.renderClose()}
-    </div>
-  );
-
-  renderClose = () => (
-    <IconButton
-      onClick={this.props.closeLibrary}
-      color="primary"
-      style={styles.closeButton}
-    >
-      <FaClose />
-    </IconButton>
-  );
-
-  renderFolderOpen = () => (
-    <IconButton onClick={this.openDirectory} color="primary">
-      <FaFolderOpen />
-    </IconButton>
-  );
-
-  renderLevelUp = () => (
-    <IconButton onClick={this.setParentAsLibrary} color="primary">
-      <FaLevelUp />
-    </IconButton>
-  );
-
-  renderLibary = () => {
-    const { basename, bookmark, contents, dirname, fullpath, id } = this.state;
-
-    return (
-      <LibraryTable
-        key={id}
-        basename={basename}
-        bookmark={bookmark}
-        dirname={dirname}
-        fullpath={fullpath}
-        isDirectory
-        contents={contents}
-        onContentClick={this.onClick}
-        saveContentDataToParent={this.saveContentDataToParent}
-        saveContentsDataToParent={this.saveContentsDataToParent}
-      />
-    );
-  };
-
-  onClick = (content) => {
-    if (content.isDirectory) {
-      this.onDirectoryClick(content);
+  onClick = ({ fullpath, isDirectory }) => {
+    if (isDirectory) {
+      this.updateContent(fullpath);
     } else {
-      this.onFileClick(content);
+      this.props.openComic(fullpath);
     }
-  };
-
-  onDirectoryClick = (content) => {
-    this.updateContent(content.fullpath);
-  };
-
-  onFileClick = (content) => {
-    this.props.openComic(content.fullpath);
   };
 
   // Function to open `Load` window, and pass path to generateContent, then setstate
   openDirectory = () => {
-    const { updateRoot } = this.props;
-    dialog.showOpenDialog(
-      {
-        properties: ['openDirectory'],
-      },
-      (filepaths) => {
-        if (Array.isArray(filepaths)) {
-          const filepath = filepaths[0];
-          updateRoot(filepath);
-          this.updateContent(filepath);
-        }
-      },
-    );
+    const properties = ['openDirectory'];
+    dialog.showOpenDialog({ properties }, this.updateRoot);
   };
 
   saveContentDataToParent = (content) => {
@@ -137,32 +73,70 @@ class LibraryLayout extends Component {
     this.setState({ contents: newContent });
   };
 
+  setContentToState = (content) => {
+    const newContent = copyDeepObject(content);
+    newContent.id = 'libraryRoot';
+    this.setState(newContent);
+  };
+
   setParentAsLibrary = () => {
     const { dirname } = this.state;
     this.updateContent(dirname);
   };
 
-  updateContent = (fullpath) => {
-    generateNestedContentFromFilepath(fullpath, (content) => {
-      const newContent = content;
-      newContent.id = 'libraryRoot';
-      this.setState(newContent);
-    });
+  updateContent = (filepath) => {
+    generateNestedContentFromFilepath(filepath, this.setContentToState);
+  };
+
+  updateRoot = ([filepath]) => {
+    if (filepath) {
+      const { updateRoot } = this.props;
+      updateRoot(filepath);
+      this.updateContent(filepath);
+    }
   };
 
   render() {
-    const { fullpath } = this.state;
+    const { basename, bookmark, contents, dirname, fullpath, id } = this.state;
 
-    const libraryTable = fullpath ? this.renderLibary() : null;
     return (
       <div className="library" style={styles.libraryStyles}>
         <LibraryHeader
           position="fixed"
           title="Library"
-          buttons={this.renderButtons()}
           onContentClick={this.onClick}
-        />
-        {libraryTable}
+        >
+          <div>
+            <IconButton onClick={this.openDirectory} color="primary">
+              <FaFolderOpen />
+            </IconButton>
+            <IconButton onClick={this.setParentAsLibrary} color="primary">
+              <FaLevelUp />
+            </IconButton>
+            <IconButton
+              onClick={this.props.closeLibrary}
+              color="primary"
+              style={styles.closeButton}
+            >
+              <FaClose />
+            </IconButton>
+          </div>
+        </LibraryHeader>
+        {fullpath && (
+          // Library expects only a few props
+          <LibraryTable
+            basename={basename}
+            bookmark={bookmark}
+            contents={contents}
+            dirname={dirname}
+            fullpath={fullpath}
+            isDirectory
+            key={id}
+            onContentClick={this.onClick}
+            saveContentDataToParent={this.saveContentDataToParent}
+            saveContentsDataToParent={this.saveContentsDataToParent}
+          />
+        )}
       </div>
     );
   }

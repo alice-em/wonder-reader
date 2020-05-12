@@ -28,4 +28,5 @@ const encodePath = (filepath) => {
   return os.platform === 'win32' ? encodeWin(tempPath) : encodeUnix(tempPath);
 };
 
+export { encodeUnix };
 export default encodePath;

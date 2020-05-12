@@ -6,26 +6,22 @@ const path = require('path');
 const sizeOf = require('image-size');
 
 // function variables
-const isPageWider = (page) => {
-  const dimensions = sizeOf(page);
-  return dimensions.width >= dimensions.height;
+// const sortNumber = (a, b) => a - b;
+const filterByWiderImages = (page) => {
+  const { height, width } = sizeOf(page);
+  return width >= height;
 };
 
 // Returns with an array of indices for double page images for core array of image files
 const generateCenterfolds = (pages) => {
   const strainedPages = strainImages(pages);
   return strainedPages
-    .filter(isPageWider)
-    .map(item => strainedPages.indexOf(item));
+    .filter(filterByWiderImages)
+    .map(page => strainedPages.indexOf(page));
 };
 
 const generateContent = (fullpath) => {
-  // Must return object
-  if (fullpath && fullpath === null) {
-    return null;
-  }
-  const stats = fs.statSync(fullpath);
-  const isDirectory = stats.isDirectory();
+  const isDirectory = fs.statSync(fullpath).isDirectory();
   return {
     basename: path.basename(fullpath),
     bookmark: isDirectory ? NaN : 0,
@@ -40,17 +36,13 @@ const generateContent = (fullpath) => {
 
 // Must return array of object
 const generateContents = (content, cb) => {
-  console.log(content);
+  // console.log(content);
   if (content.isDirectory) {
-    const renderContent = (file) => {
-      const filepath = path.join(content.fullpath, file);
-      return generateContent(filepath);
-    };
-
     fs.readdir(content.fullpath, (err, files) => {
       if (!err) {
-        const strainedFiles = strainComics(files, content.fullpath);
-        const contents = strainedFiles.map(renderContent);
+        const contents = strainComics(files)
+          .map(file => path.join(content.fullpath, file))
+          .map(file => generateContent(file));
         cb(err, contents);
       } else {
         cb(null, {});

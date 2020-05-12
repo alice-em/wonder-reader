@@ -1,9 +1,10 @@
-import React from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import PropTypes from 'prop-types';
+import React from 'react';
+import withStyles from '@material-ui/core/styles/withStyles';
 
+/* istanbul ignore next */
 const styles = theme => ({
   LoaderElement: {
     position: 'absolute',
@@ -28,28 +29,25 @@ const styles = theme => ({
   }),
 });
 
-const Loading = ({ classes, isLoading }) =>
-  isLoading ? <LoaderElement classes={classes} /> : null;
-
-const LoaderElement = ({ classes }) => (
+const PaperElement = ({ classes }) => (
   <div style={styles.LoaderElement}>
-    <PaperElement classes={classes} />
+    <Paper className={classes.root} elevation={4} style={styles.Paper}>
+      <CircularProgress
+        className={classes.progress}
+        color="secondary"
+        size={50}
+      />
+    </Paper>
   </div>
 );
 
-const PaperElement = ({ classes }) => (
-  <Paper className={classes.root} elevation={4} style={styles.Paper}>
-    <CircularProgress
-      className={classes.progress}
-      color="secondary"
-      size={50}
-    />
-  </Paper>
-);
+const Loading = ({ classes, isLoading }) =>
+  isLoading && <PaperElement classes={classes} />;
 
 Loading.propTypes = {
   classes: PropTypes.object.isRequired, // eslint-disable-line
   isLoading: PropTypes.bool.isRequired,
 };
 
+export { Loading, PaperElement };
 export default withStyles(styles)(Loading);
