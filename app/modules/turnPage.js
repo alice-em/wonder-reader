@@ -4,13 +4,13 @@ const turnPage = ({
   currentPageIndex,
   centerfolds,
   pageCount,
-  page: { length: pagesLength },
+  pages,
   polarity,
 }) => {
   // centerfolds for singlePaging ( [2, 5, 11]  )
   // currentPageIndex for currentPage, which will make a new var newPageIndex ( Num )
   // pageCount for number of pages turned ( 2 || 1 )
-  // pagesLength for full comic scope ( 18 )
+  // pages.length for full comic scope ( 18 )
   // polarity for left or right ( 1 || -1 )
 
   const isCenterfold = index => centerfolds.includes(index);
@@ -19,15 +19,15 @@ const turnPage = ({
   const isRelativeIndexACenterfold = index =>
     areThereUpcomingCenterfolds(currentPageIndex + index);
 
-  let newPageIndex = null;
-  let pagesToDisplay = null;
+  let newPageIndex;
+  let pagesToDisplay;
 
   const shouldRenderFirstPage = currentPageIndex + pageCount * polarity < 0;
   const shouldRenderLastPage =
-    currentPageIndex + pageCount * polarity >= pagesLength - 1;
+    currentPageIndex + pageCount * polarity >= pages.length - 1;
 
   if (shouldRenderLastPage) {
-    newPageIndex = pagesLength - 1;
+    newPageIndex = pages.length - 1;
     pagesToDisplay = 1;
   } else if (shouldRenderFirstPage) {
     newPageIndex = 0;
@@ -51,7 +51,7 @@ const turnPage = ({
     }
   } else if (isRelativeIndexACenterfold(-2)) {
     newPageIndex = currentPageIndex - 1;
-    pagesToDisplay = 1;
+    pagesToDisplay = 1; // May be buggy ?
   } else {
     newPageIndex = currentPageIndex - 2;
     pagesToDisplay = 2;
