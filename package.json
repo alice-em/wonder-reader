@@ -223,7 +223,7 @@
     "is-rar": "^2.0.0",
     "node-stream-zip": "1.7.0",
     "react": "16.4.0",
-    "react-dom": "16.4.0",
+    "react-dom": "16.4.2",
     "react-hot-loader": "4.3.1",
     "react-indiana-drag-scroll": "^1.6.1",
     "react-redux": "5.0.7",
