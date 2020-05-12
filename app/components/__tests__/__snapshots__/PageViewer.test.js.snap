@@ -20,6 +20,7 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "class",
     "props": Object {
+      "activationDistance": 10,
       "children": <div
         className="pages"
         style={
@@ -32,6 +33,12 @@ ShallowWrapper {
         }
       />,
       "className": "PageViewer dragscroll",
+      "hideScrollbars": true,
+      "horizontal": true,
+      "nativeMobileScroll": true,
+      "stopPropagation": false,
+      "style": Object {},
+      "vertical": true,
     },
     "ref": null,
     "rendered": Object {
@@ -60,6 +67,7 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "class",
       "props": Object {
+        "activationDistance": 10,
         "children": <div
           className="pages"
           style={
@@ -72,6 +80,12 @@ ShallowWrapper {
           }
         />,
         "className": "PageViewer dragscroll",
+        "hideScrollbars": true,
+        "horizontal": true,
+        "nativeMobileScroll": true,
+        "stopPropagation": false,
+        "style": Object {},
+        "vertical": true,
       },
       "ref": null,
       "rendered": Object {

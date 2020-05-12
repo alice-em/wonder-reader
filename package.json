@@ -1,7 +1,7 @@
 {
   "name": "wonder-reader",
   "productName": "Wonder Reader",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "A Comic Book Reader, made with React, Electron, and Node",
   "scripts": {
     "build": "concurrently \"npm run build-main\" \"npm run build-renderer\"",
@@ -226,6 +226,7 @@
     "react-dom": "16.4.0",
     "react-dragscroll": "^2.0.1",
     "react-hot-loader": "4.3.1",
+    "react-indiana-drag-scroll": "^1.6.1",
     "react-redux": "5.0.7",
     "react-router": "4.3.1",
     "react-router-redux": "4.0.8",

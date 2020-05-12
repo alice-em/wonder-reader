@@ -1,6 +1,6 @@
-import DragScroll from 'react-dragscroll';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import ScrollContainer from 'react-indiana-drag-scroll';
 
 import generatePages from './generatePages';
 
@@ -59,7 +59,7 @@ class PageViewer extends Component {
     const { pages, zoomLevel } = this.props;
 
     return (
-      <DragScroll className="PageViewer dragscroll">
+      <ScrollContainer className="PageViewer dragscroll">
         <div
           className="pages"
           style={{
@@ -71,7 +71,7 @@ class PageViewer extends Component {
         >
           {generatePages({ pages })}
         </div>
-      </DragScroll>
+      </ScrollContainer>
     );
   }
 }
