@@ -59,7 +59,7 @@ class PageViewer extends Component {
     const { pages, zoomLevel } = this.props;
 
     return (
-      <ScrollContainer className="PageViewer dragscroll">
+      <ScrollContainer className="PageViewer dragscroll" hideScrollbars={false}>
         <div
           className="pages"
           style={{

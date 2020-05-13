@@ -33,7 +33,7 @@ ShallowWrapper {
         }
       />,
       "className": "PageViewer dragscroll",
-      "hideScrollbars": true,
+      "hideScrollbars": false,
       "horizontal": true,
       "nativeMobileScroll": true,
       "stopPropagation": false,
@@ -80,7 +80,7 @@ ShallowWrapper {
           }
         />,
         "className": "PageViewer dragscroll",
-        "hideScrollbars": true,
+        "hideScrollbars": false,
         "horizontal": true,
         "nativeMobileScroll": true,
         "stopPropagation": false,

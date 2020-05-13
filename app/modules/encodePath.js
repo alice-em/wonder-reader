@@ -1,25 +1,20 @@
 const os = require('os');
 const path = require('path');
 
-const encodeUnix = (filepath) => {
-  const tempPath = filepath.split(path.sep);
+const generateEncodedPath = separatedPath =>
+  path.join(...separatedPath.map(encodeURIComponent));
 
-  let newPath = '';
-  for (let j = 0; j < tempPath.length; j += 1) {
-    newPath = path.join(newPath, encodeURIComponent(tempPath[j]));
-  }
+const encodeUnix = (filepath) => {
+  const separatedPath = filepath.split(path.sep);
+  const newPath = generateEncodedPath(separatedPath);
   return `/${newPath}`.replace(/'/g, "\\'"); // To set root folder && Fixes err with the character \'
 };
 
 const encodeWin = (filepath) => {
-  const tempPath = filepath.split(path.sep);
-
-  let newPath = '';
+  const separatedPath = filepath.split(path.sep);
+  const driveLetter = separatedPath.shift();
+  const newPath = generateEncodedPath(separatedPath);
   // Saves letter drive information
-  const driveLetter = tempPath[0];
-  for (let j = 1; j < tempPath.length; j += 1) {
-    newPath = path.join(newPath, encodeURIComponent(tempPath[j]));
-  }
   return path.join(driveLetter, newPath); // returns c:\path\to\file.cbz
 };
 
