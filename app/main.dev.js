@@ -36,7 +36,7 @@ const installExtensions = async () => {
   const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS'];
 
   return Promise.all(
-    extensions.map(name => installer.default(installer[name], forceDownload))
+    extensions.map(name => installer.default(installer[name], forceDownload)),
   ).catch(console.log);
 };
 
@@ -65,7 +65,7 @@ app.on('ready', async () => {
     width: 1024,
     height: 728,
     minWidth: 800,
-    minHeight: 600
+    minHeight: 600,
     // frame: false,
   });
 

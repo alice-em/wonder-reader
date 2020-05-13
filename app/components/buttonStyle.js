@@ -1,10 +1,10 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 
 const buttonStyle = {
   margin: '5px 5px 2px 2px',
   position: 'absolute',
   right: '0',
-  top: '0'
+  top: '0',
 };
 
 const buttonTheme = createMuiTheme({
@@ -21,7 +21,7 @@ const buttonTheme = createMuiTheme({
       dark: '#b61827',
       text: '#fff',
     },
-  }
+  },
 });
 
-export {buttonStyle, buttonTheme};
+export { buttonStyle, buttonTheme };

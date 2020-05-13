@@ -1,79 +1,65 @@
-import React, { Component } from 'react';
 import Drawer from '@material-ui/core/Drawer';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import React, { Component } from 'react';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 import LibraryLayout from './LibraryLayout';
 
 const styles = {
   list: {
-    width: 250
+    width: 250,
   },
   fullList: {
-    width: 'auto'
+    width: 'auto',
   },
   PaperProps: {
     borderRadius: '0px 0px 0px 15px',
     margin: 'auto',
-    maxWidth: '960px'
-  }
+    maxWidth: '960px',
+  },
 };
 
 class Library extends Component {
   state = {
-    root: this.props.loadedLibrary
+    root: this.props.loadedLibrary,
   };
 
-  updateRoot = filepath => {
+  updateRoot = (filepath) => {
     this.setState({ root: filepath });
   };
 
-  renderDrawer = () => {
-    const { closeDrawer, open } = this.props;
-
-    return (
-      <Drawer
-        anchor="top"
-        open={open}
-        onClose={closeDrawer}
-        PaperProps={{ style: styles.PaperProps }}
-        variant="temporary"
-        transitionDuration={125}
-      >
-        <div tabIndex={0} role="button" onKeyDown={closeDrawer}>
-          {this.renderLibraryLayout()}
-        </div>
-      </Drawer>
-    );
-  };
-
-  renderLibraryLayout = () => {
+  render() {
     const {
       classes,
       closeDrawer,
+      open,
       openComic,
-      saveContentDataToMain
+      saveContentDataToMain,
+      style,
     } = this.props;
     const { root } = this.state;
 
     return (
-      <LibraryLayout
-        className={classes.list}
-        closeLibrary={closeDrawer}
-        openComic={openComic}
-        root={root}
-        saveContentDataToParent={saveContentDataToMain}
-        updateRoot={this.updateRoot}
-      />
-    );
-  };
-
-  render() {
-    const { style } = this.props;
-
-    return (
       <div className="Library" style={style}>
-        {this.renderDrawer()}
+        <Drawer
+          anchor="top"
+          open={open}
+          onClose={closeDrawer}
+          PaperProps={{ style: styles.PaperProps }}
+          variant="temporary"
+          transitionDuration={125}
+        >
+          <div tabIndex={0} role="button" onKeyDown={closeDrawer}>
+            <LibraryLayout
+              className={classes.list}
+              closeLibrary={closeDrawer}
+              openComic={openComic}
+              root={root}
+              saveContentDataToParent={saveContentDataToMain}
+              updateRoot={this.updateRoot}
+            />
+          </div>
+        </Drawer>
       </div>
     );
   }
@@ -81,7 +67,7 @@ class Library extends Component {
 
 Library.defaultProps = {
   loadedLibrary: null,
-  style: {}
+  style: {},
 };
 
 Library.propTypes = {
@@ -91,7 +77,8 @@ Library.propTypes = {
   open: PropTypes.bool.isRequired,
   openComic: PropTypes.func.isRequired,
   saveContentDataToMain: PropTypes.func.isRequired,
-  style: PropTypes.objectOf(PropTypes.object.isRequired)
+  style: PropTypes.objectOf(PropTypes.object.isRequired),
 };
 
+export { Library };
 export default withStyles(styles)(Library);

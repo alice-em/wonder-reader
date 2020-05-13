@@ -1,5 +1,5 @@
 // To handle file extraction, error checking, and for setting temp directories
-import { isImage, strainImages } from '../modules/strain';
+import { isImage, strainImages } from './strain';
 
 const fs = require('fs');
 const isDirectory = require('is-directory');
@@ -44,7 +44,7 @@ class File {
         if (isDirectory.sync(this.tempdir)) {
           rimraf.sync(this.tempdir);
         }
-        mkdirp(this.tempdir, errd => {
+        mkdirp(this.tempdir, (errd) => {
           this.routeExtraction(errd, cb);
         });
       }
@@ -54,8 +54,8 @@ class File {
   // TODO: see how to create a deb file with dependencies
   // TODO: create snap with dependencies
   extractRarLinux(cb) {
-    const urar = new Unrar(this.origin);
-    urar.extract(this.tempdir, null, err => {
+    const unrar = new Unrar(this.origin);
+    unrar.extract(this.tempdir, null, (err) => {
       if (err) {
         this.error = true;
       } else {
@@ -78,7 +78,7 @@ class File {
   extractZip(cb) {
     const zip = new StreamZip({
       file: this.origin,
-      storeEntries: true
+      storeEntries: true,
     });
     zip.on('ready', () => {
       zip.extract(null, this.tempdir, () => {
@@ -126,7 +126,7 @@ class File {
     // initialize with this.tempdir
     const files = fs.readdirSync(directory);
     const filepaths = files.map(file => path.join(directory, file));
-    filepaths.forEach(filepath => {
+    filepaths.forEach((filepath) => {
       this.fileMover(filepath);
     });
   }

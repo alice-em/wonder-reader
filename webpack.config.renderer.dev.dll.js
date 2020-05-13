@@ -33,21 +33,21 @@ export default merge.smart(baseConfig, {
 
   entry: {
     renderer: Object.keys(dependencies || {}).filter(
-      dependency => dependency !== 'font-awesome'
-    )
+      dependency => dependency !== 'font-awesome',
+    ),
   },
 
   output: {
     library: 'renderer',
     path: dist,
     filename: '[name].dev.dll.js',
-    libraryTarget: 'var'
+    libraryTarget: 'var',
   },
 
   plugins: [
     new webpack.DllPlugin({
       path: path.join(dist, '[name].json'),
-      name: '[name]'
+      name: '[name]',
     }),
 
     /**
@@ -60,7 +60,7 @@ export default merge.smart(baseConfig, {
      * development checks
      */
     new webpack.EnvironmentPlugin({
-      NODE_ENV: 'development'
+      NODE_ENV: 'development',
     }),
 
     new webpack.LoaderOptionsPlugin({
@@ -68,9 +68,9 @@ export default merge.smart(baseConfig, {
       options: {
         context: path.resolve(process.cwd(), 'app'),
         output: {
-          path: path.resolve(process.cwd(), 'dll')
-        }
-      }
-    })
-  ]
+          path: path.resolve(process.cwd(), 'dll'),
+        },
+      },
+    }),
+  ],
 });
