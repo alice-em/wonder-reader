@@ -1,7 +1,7 @@
 // strain.js cleans out the dirty files, like .DS_Store
 const path = require('path');
 
-const polaritySort = require('../modules/polaritySort.js');
+const polaritySort = require('./polaritySort');
 const { copyArray } = require('../modules/copyData');
 
 const comicTypes = ['.cbr', '.cbz'];

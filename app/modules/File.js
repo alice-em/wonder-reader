@@ -1,5 +1,5 @@
 // To handle file extraction, error checking, and for setting temp directories
-import { isImage, strainImages } from '../modules/strain';
+import { isImage, strainImages } from './strain';
 
 const fs = require('fs');
 const isDirectory = require('is-directory');

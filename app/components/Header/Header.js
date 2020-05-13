@@ -4,36 +4,28 @@ import React from 'react';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
-import ButtonBar from './ButtonBar';
-import headerStyle from './headerStyle';
+import ControlBar from './ControlBar';
+import headerStyle from '../headerStyle';
 
-const Header = ({
-  buttons,
-  changePageCount,
-  pageCount,
-  setZoomLevel,
-  zoomLevel,
-}) => (
+const Header = props => (
   <AppBar>
     <Toolbar>
       <Typography variant="title" style={headerStyle}>
         Wonder Reader
       </Typography>
-      <ButtonBar
-        buttons={buttons}
-        changePageCount={changePageCount}
-        pageCount={pageCount}
-        setZoomLevel={setZoomLevel}
-        zoomLevel={zoomLevel}
-      />
+      <ControlBar {...props} />
     </Toolbar>
   </AppBar>
 );
 
 Header.propTypes = {
   changePageCount: PropTypes.func.isRequired,
+  openLibrary: PropTypes.func.isRequired,
+  openPrevComic: PropTypes.func.isRequired,
   pageCount: PropTypes.number.isRequired,
   setZoomLevel: PropTypes.func.isRequired,
+  turnPageLeft: PropTypes.func.isRequired,
+  turnPageRight: PropTypes.func.isRequired,
   zoomLevel: PropTypes.number.isRequired,
 };
 

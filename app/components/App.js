@@ -1,21 +1,19 @@
+import fs from 'fs';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import path from 'path';
 import React, { Component } from 'react';
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import sizeOf from 'image-size';
 
+import encodePath from '../modules/encodePath';
+import File from '../modules/File';
 import Header from './Header';
 import Library from './Library';
 import Loading from './Loading';
 import PageViewer from './PageViewer';
 import theme from './theme';
-
-import encodePath from '../modules/encodePath';
-import File from '../modules/File';
+import turnPage from '../modules/turnPage';
 import { generateCenterfolds } from '../modules/generate';
 import { strainComics } from '../modules/strain';
-import turnPage from '../modules/turnPage';
-
-const fs = require('fs');
-const path = require('path');
-const sizeOf = require('image-size');
 
 export default class App extends Component {
   state = {
@@ -42,66 +40,6 @@ export default class App extends Component {
     // Errors
     // error: false,
     errorMessage: '',
-
-    // Button Data to pass to Main => Header => ButtonBar
-    buttons: {
-      changePageCount: {
-        name: 'changePageCount',
-        disabled: false,
-        func: () => {
-          this.changePageCount();
-        },
-      },
-      nextComic: {
-        name: 'nextComic',
-        disabled: false,
-        func: () => {
-          this.openNextComic();
-        },
-      },
-      openLibrary: {
-        name: 'openLibrary',
-        disabled: false,
-        func: () => {
-          this.openLibrary();
-        },
-      },
-      pageLeft: {
-        name: 'pageLeft',
-        disabled: false,
-        func: () => {
-          this.turnPageLeft();
-        },
-      },
-      pageRight: {
-        name: 'pageRight',
-        disabled: false,
-        func: () => {
-          this.turnPageRight();
-        },
-      },
-      prevComic: {
-        name: 'prevComic',
-        disabled: false,
-        func: () => {
-          this.openPrevComic();
-        },
-      },
-      // options: {
-      //   name: 'options',
-      //   disabled: false,
-      //   func: () => {
-      //     this.toggleOptions();
-      //   }
-      // },
-      // trash: {
-      //   name: 'trash',
-      //   disabled: false,
-      //   func: () => {
-      //     this.clearCache();
-      //   }
-      // }
-    },
 
     // Material UI Drawer data
     top: false,
@@ -239,6 +177,7 @@ export default class App extends Component {
   mapPages = (files, tempdir) =>
     files.map((file, key) => {
       const pagePath = path.join(tempdir, file);
+
       return {
         encodedPagePath: encodePath(pagePath),
         key,
@@ -420,7 +359,6 @@ export default class App extends Component {
 
   render() {
     const {
-      buttons,
       content,
       encodedPages,
       isLoading,
@@ -434,10 +372,13 @@ export default class App extends Component {
       <MuiThemeProvider theme={theme}>
         <div className="main">
           <Header
-            buttons={buttons}
             changePageCount={this.changePageCount}
+            openLibrary={this.openLibrary}
+            openPrevComic={this.openPrevComic}
             pageCount={pageCount}
             setZoomLevel={this.setZoomLevel}
+            turnPageLeft={this.turnPageLeft}
+            turnPageRight={this.turnPageRight}
             zoomLevel={zoomLevel}
           />
           <Library

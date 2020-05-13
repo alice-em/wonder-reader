@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-import SliderInput from './SliderInput';
+import SliderInput from '../SliderInput';
 
 const boxShadow = [
   'inset rgb(135, 169, 214) 0px 3px 0px',
