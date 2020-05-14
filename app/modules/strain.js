@@ -2,7 +2,6 @@
 const path = require('path');
 
 const polaritySort = require('./polaritySort');
-const { copyArray } = require('../modules/copyData');
 
 const comicTypes = ['.cbr', '.cbz'];
 const imageTypes = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp'];
@@ -16,13 +15,11 @@ const isComic = isSomething(comicTypes);
 const isImage = isSomething(imageTypes);
 
 // Array Functions
-const isFileAFileType = fileTypes => file =>
-  fileTypes.includes(path.extname(file));
-const sortArrayByAlpha = ARRAY => copyArray(ARRAY).sort(polaritySort);
+const sortArrayByAlpha = ARRAY => [...ARRAY].sort(polaritySort);
 
 // Cleans out non image files from ARRAY
 const strainer = fileTypes => files =>
-  files.filter(isFileAFileType(fileTypes)).sort(polaritySort);
+  files.filter(isSomething(fileTypes)).sort(polaritySort);
 
 const strainComics = strainer(comicTypes);
 const strainOnlyComics = strainer(comicTypes);
