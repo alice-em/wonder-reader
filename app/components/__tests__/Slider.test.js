@@ -4,12 +4,16 @@ import React from 'react';
 
 import Slider from '../Header/Slider';
 
+jest.mock('react', () => ({
+  ...jest.requireActual('react'),
+  useEffect: jest.fn(),
+}));
+
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('Slider', () => {
-  const onChangeFunc = jest.fn();
   it('should render', () => {
-    const wrapper = shallow(<Slider onChange={onChangeFunc} value={100} />);
+    const wrapper = shallow(<Slider onChange={jest.fn()} value={100} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

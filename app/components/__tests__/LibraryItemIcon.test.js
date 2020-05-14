@@ -1,7 +1,7 @@
 import Adapter from 'enzyme-adapter-react-16';
 import Enzyme, { shallow } from 'enzyme';
 import React from 'react';
-import { FaFolderO, FaFileArchiveO } from 'react-icons/lib/fa';
+import { FaRegFolderOpen, FaRegFileArchive } from 'react-icons/fa';
 
 import LibraryItemIcon from '../LibraryItemIcon';
 
@@ -20,15 +20,15 @@ describe('LibraryItem', () => {
 
   it('should have FaFolderO as an icon for isDirectory = true', () => {
     const wrapper = shallow(<LibraryItemIcon iconSize={30} isDirectory />);
-    expect(wrapper.find(FaFileArchiveO)).toHaveLength(0);
-    expect(wrapper.find(FaFolderO)).toHaveLength(1);
+    expect(wrapper.find(FaRegFileArchive)).toHaveLength(0);
+    expect(wrapper.find(FaRegFolderOpen)).toHaveLength(1);
   });
 
   it('should have FaFileArchiveO as an icon for isDirectory = true', () => {
     const wrapper = shallow(
       <LibraryItemIcon iconSize={30} isDirectory={false} />,
     );
-    expect(wrapper.find(FaFileArchiveO)).toHaveLength(1);
-    expect(wrapper.find(FaFolderO)).toHaveLength(0);
+    expect(wrapper.find(FaRegFileArchive)).toHaveLength(1);
+    expect(wrapper.find(FaRegFolderOpen)).toHaveLength(0);
   });
 });

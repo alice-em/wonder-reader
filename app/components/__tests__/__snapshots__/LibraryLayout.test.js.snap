@@ -40,7 +40,7 @@ ShallowWrapper {
               color="primary"
               onClick={[Function]}
             >
-              <FaLevelUp />
+              <FaLevelUpAlt />
             </WithStyles(IconButton)>
             <WithStyles(IconButton)
               color="primary"
@@ -51,7 +51,7 @@ ShallowWrapper {
                 }
               }
             >
-              <FaClose />
+              <FaTimes />
             </WithStyles(IconButton)>
           </div>
         </LibraryHeader>,
@@ -82,7 +82,7 @@ ShallowWrapper {
               color="primary"
               onClick={[Function]}
             >
-              <FaLevelUp />
+              <FaLevelUpAlt />
             </WithStyles(IconButton)>
             <WithStyles(IconButton)
               color="primary"
@@ -93,7 +93,7 @@ ShallowWrapper {
                 }
               }
             >
-              <FaClose />
+              <FaTimes />
             </WithStyles(IconButton)>
           </div>,
           "onContentClick": [Function],
@@ -117,7 +117,7 @@ ShallowWrapper {
                 color="primary"
                 onClick={[Function]}
               >
-                <FaLevelUp />
+                <FaLevelUpAlt />
               </WithStyles(IconButton)>,
               <WithStyles(IconButton)
                 color="primary"
@@ -128,7 +128,7 @@ ShallowWrapper {
                   }
                 }
               >
-                <FaClose />
+                <FaTimes />
               </WithStyles(IconButton)>,
             ],
           },
@@ -160,7 +160,7 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
-                "children": <FaLevelUp />,
+                "children": <FaLevelUpAlt />,
                 "color": "primary",
                 "onClick": [Function],
               },
@@ -181,7 +181,7 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
-                "children": <FaClose />,
+                "children": <FaTimes />,
                 "color": "primary",
                 "onClick": [MockFunction],
                 "style": Object {
@@ -232,7 +232,7 @@ ShallowWrapper {
                 color="primary"
                 onClick={[Function]}
               >
-                <FaLevelUp />
+                <FaLevelUpAlt />
               </WithStyles(IconButton)>
               <WithStyles(IconButton)
                 color="primary"
@@ -243,7 +243,7 @@ ShallowWrapper {
                   }
                 }
               >
-                <FaClose />
+                <FaTimes />
               </WithStyles(IconButton)>
             </div>
           </LibraryHeader>,
@@ -274,7 +274,7 @@ ShallowWrapper {
                 color="primary"
                 onClick={[Function]}
               >
-                <FaLevelUp />
+                <FaLevelUpAlt />
               </WithStyles(IconButton)>
               <WithStyles(IconButton)
                 color="primary"
@@ -285,7 +285,7 @@ ShallowWrapper {
                   }
                 }
               >
-                <FaClose />
+                <FaTimes />
               </WithStyles(IconButton)>
             </div>,
             "onContentClick": [Function],
@@ -309,7 +309,7 @@ ShallowWrapper {
                   color="primary"
                   onClick={[Function]}
                 >
-                  <FaLevelUp />
+                  <FaLevelUpAlt />
                 </WithStyles(IconButton)>,
                 <WithStyles(IconButton)
                   color="primary"
@@ -320,7 +320,7 @@ ShallowWrapper {
                     }
                   }
                 >
-                  <FaClose />
+                  <FaTimes />
                 </WithStyles(IconButton)>,
               ],
             },
@@ -352,7 +352,7 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
-                  "children": <FaLevelUp />,
+                  "children": <FaLevelUpAlt />,
                   "color": "primary",
                   "onClick": [Function],
                 },
@@ -373,7 +373,7 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
-                  "children": <FaClose />,
+                  "children": <FaTimes />,
                   "color": "primary",
                   "onClick": [MockFunction],
                   "style": Object {

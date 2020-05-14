@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { FaFolderO, FaFileArchiveO } from 'react-icons/lib/fa';
+import { FaRegFolderOpen, FaRegFileArchive } from 'react-icons/fa';
 
 const LibraryItemIcon = ({ iconSize, isDirectory }) =>
   isDirectory ? (
-    <FaFolderO size={iconSize} />
+    <FaRegFolderOpen size={iconSize} />
   ) : (
-    <FaFileArchiveO size={iconSize} />
+    <FaRegFileArchive size={iconSize} />
   );
 
 LibraryItemIcon.propTypes = {

@@ -7,9 +7,9 @@ import {
   FaAngleLeft,
   FaAngleRight,
   FaBook,
-  FaMinusSquareO,
-  FaSquareO,
-} from 'react-icons/lib/fa';
+  FaPause,
+  FaStop,
+} from 'react-icons/fa';
 
 import Button from './Button';
 import Slider from './Slider';
@@ -31,8 +31,8 @@ const ControlBar = ({
       <Button onClick={openLibrary}>
         <FaBook />
       </Button>
-      <Button onClick={changePageCount} rotation={90}>
-        {pageCount === 2 ? <FaMinusSquareO /> : <FaSquareO />}
+      <Button onClick={changePageCount}>
+        {pageCount === 2 ? <FaPause /> : <FaStop />}
       </Button>
       <Button onClick={openPrevComic}>
         <FaAngleDoubleLeft />
