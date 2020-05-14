@@ -25,8 +25,6 @@ const styles = {
 
 class LibraryLayout extends Component {
   state = {
-    basename: '',
-    bookmark: '',
     contents: [],
     dirname: '',
     fullpath: null,
@@ -62,17 +60,6 @@ class LibraryLayout extends Component {
     dialog.showOpenDialog({ properties }, this.updateRoot);
   };
 
-  saveContentDataToParent = (content) => {
-    const newContent = copyDeepObject(content);
-    this.setState(newContent);
-  };
-
-  saveContentsDataToParent = (contents) => {
-    const newContent = copyDeepObject(this.state);
-    newContent.contents = contents;
-    this.setState({ contents: newContent });
-  };
-
   setContentToState = (content) => {
     const newContent = copyDeepObject(content);
     newContent.id = 'libraryRoot';
@@ -97,7 +84,7 @@ class LibraryLayout extends Component {
   };
 
   render() {
-    const { basename, bookmark, contents, dirname, fullpath, id } = this.state;
+    const { contents, fullpath } = this.state;
 
     return (
       <div className="library" style={styles.libraryStyles}>
@@ -124,18 +111,7 @@ class LibraryLayout extends Component {
         </LibraryHeader>
         {fullpath && (
           // Library expects only a few props
-          <LibraryTable
-            basename={basename}
-            bookmark={bookmark}
-            contents={contents}
-            dirname={dirname}
-            fullpath={fullpath}
-            isDirectory
-            key={id}
-            onContentClick={this.onClick}
-            saveContentDataToParent={this.saveContentDataToParent}
-            saveContentsDataToParent={this.saveContentsDataToParent}
-          />
+          <LibraryTable contents={contents} onContentClick={this.onClick} />
         )}
       </div>
     );

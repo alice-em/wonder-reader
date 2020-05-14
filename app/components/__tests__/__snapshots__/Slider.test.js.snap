@@ -32,6 +32,8 @@ ShallowWrapper {
               "cursor": "default",
               "fontFamily": "Carter One",
               "fontSize": "20px",
+              "marginRight": "5px",
+              "textAlign": "right",
               "width": "45px",
             }
           }
@@ -77,6 +79,8 @@ ShallowWrapper {
             "cursor": "default",
             "fontFamily": "Carter One",
             "fontSize": "20px",
+            "marginRight": "5px",
+            "textAlign": "right",
             "width": "45px",
           },
         },
@@ -105,6 +109,8 @@ ShallowWrapper {
                 "cursor": "default",
                 "fontFamily": "Carter One",
                 "fontSize": "20px",
+                "marginRight": "5px",
+                "textAlign": "right",
                 "width": "45px",
               }
             }
@@ -150,6 +156,8 @@ ShallowWrapper {
               "cursor": "default",
               "fontFamily": "Carter One",
               "fontSize": "20px",
+              "marginRight": "5px",
+              "textAlign": "right",
               "width": "45px",
             },
           },

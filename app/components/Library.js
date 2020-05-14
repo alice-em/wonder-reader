@@ -1,6 +1,6 @@
 import Drawer from '@material-ui/core/Drawer';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import LibraryLayout from './LibraryLayout';
@@ -19,51 +19,41 @@ const styles = {
   },
 };
 
-class Library extends Component {
-  state = {
-    root: this.props.loadedLibrary,
-  };
+const Library = ({
+  classes,
+  closeDrawer,
+  loadedLibrary,
+  open,
+  openComic,
+  saveContentDataToMain,
+  style,
+}) => {
+  const [root, updateRoot] = useState(loadedLibrary);
 
-  updateRoot = (filepath) => {
-    this.setState({ root: filepath });
-  };
-
-  render() {
-    const {
-      classes,
-      closeDrawer,
-      open,
-      openComic,
-      saveContentDataToMain,
-      style,
-    } = this.props;
-    const { root } = this.state;
-
-    return (
-      <div className="Library" style={style}>
-        <Drawer
-          anchor="top"
-          open={open}
-          onClose={closeDrawer}
-          PaperProps={{ style: styles.PaperProps }}
-          variant="temporary"
-          transitionDuration={125}
-        >
-          <div tabIndex={0} role="button" onKeyDown={closeDrawer}>
-            <LibraryLayout
-              className={classes.list}
-              closeLibrary={closeDrawer}
-              openComic={openComic}
-              root={root}
-              saveContentDataToParent={saveContentDataToMain}
-              updateRoot={this.updateRoot}
-            />
-          </div>
-        </Drawer>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="Library" style={style}>
+      <Drawer
+        anchor="top"
+        open={open}
+        onClose={closeDrawer}
+        PaperProps={{ style: styles.PaperProps }}
+        variant="temporary"
+        transitionDuration={125}
+      >
+        <div tabIndex={0} role="button" onKeyDown={closeDrawer}>
+          <LibraryLayout
+            className={classes.list}
+            closeLibrary={closeDrawer}
+            openComic={openComic}
+            root={root}
+            saveContentDataToParent={saveContentDataToMain}
+            updateRoot={updateRoot}
+          />
+        </div>
+      </Drawer>
+    </div>
+  );
+};
 
 Library.defaultProps = {
   loadedLibrary: null,

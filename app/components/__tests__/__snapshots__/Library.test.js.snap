@@ -56,7 +56,7 @@ ShallowWrapper {
             openComic={[MockFunction]}
             root="./"
             saveContentDataToParent={[MockFunction]}
-            updateRoot={[Function]}
+            updateRoot={[MockFunction]}
           />
         </div>
       </WithStyles(Drawer)>,
@@ -88,7 +88,7 @@ ShallowWrapper {
             openComic={[MockFunction]}
             root="./"
             saveContentDataToParent={[MockFunction]}
-            updateRoot={[Function]}
+            updateRoot={[MockFunction]}
           />
         </div>,
         "onClose": [MockFunction],
@@ -108,7 +108,7 @@ ShallowWrapper {
             openComic={[MockFunction]}
             root="./"
             saveContentDataToParent={[MockFunction]}
-            updateRoot={[Function]}
+            updateRoot={[MockFunction]}
           />,
           "onKeyDown": [MockFunction],
           "role": "button",
@@ -125,7 +125,7 @@ ShallowWrapper {
             "openComic": [MockFunction],
             "root": "./",
             "saveContentDataToParent": [MockFunction],
-            "updateRoot": [Function],
+            "updateRoot": [MockFunction],
           },
           "ref": null,
           "rendered": null,
@@ -170,7 +170,7 @@ ShallowWrapper {
               openComic={[MockFunction]}
               root="./"
               saveContentDataToParent={[MockFunction]}
-              updateRoot={[Function]}
+              updateRoot={[MockFunction]}
             />
           </div>
         </WithStyles(Drawer)>,
@@ -202,7 +202,7 @@ ShallowWrapper {
               openComic={[MockFunction]}
               root="./"
               saveContentDataToParent={[MockFunction]}
-              updateRoot={[Function]}
+              updateRoot={[MockFunction]}
             />
           </div>,
           "onClose": [MockFunction],
@@ -222,7 +222,7 @@ ShallowWrapper {
               openComic={[MockFunction]}
               root="./"
               saveContentDataToParent={[MockFunction]}
-              updateRoot={[Function]}
+              updateRoot={[MockFunction]}
             />,
             "onKeyDown": [MockFunction],
             "role": "button",
@@ -239,7 +239,7 @@ ShallowWrapper {
               "openComic": [MockFunction],
               "root": "./",
               "saveContentDataToParent": [MockFunction],
-              "updateRoot": [Function],
+              "updateRoot": [MockFunction],
             },
             "ref": null,
             "rendered": null,

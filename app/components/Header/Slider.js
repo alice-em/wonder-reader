@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 
 import SliderInput from '../SliderInput';
 
@@ -26,49 +26,43 @@ const styles = {
     cursor: 'default',
     fontFamily: 'Carter One',
     fontSize: '20px',
+    marginRight: '5px',
+    textAlign: 'right',
     width: '45px',
   },
 };
 
 const sliderComponent = document.getElementById('sliderComponent');
+const blurSliderInput = () => {
+  document.getElementById('SliderInput').blur();
+};
 
-class Slider extends Component {
-  componentDidMount() {
+const Slider = ({ onChange, value }) => {
+  useEffect(() => {
     if (sliderComponent) {
-      sliderComponent.addEventListener('mouseleave', this.blurSliderInput);
+      sliderComponent.addEventListener('mouseleave', blurSliderInput);
     }
-  }
 
-  componentWillUnmount() {
-    if (sliderComponent) {
-      sliderComponent.removeEventListener('mouseleave', this.blurSliderInput);
-    }
-  }
+    return () => {
+      if (sliderComponent) {
+        sliderComponent.removeEventListener('mouseleave', blurSliderInput);
+      }
+    };
+  });
 
-  blurSliderInput = () => {
-    document.getElementById('SliderInput').blur();
+  const onValueChange = ({ target: { value: eventValue } }) => {
+    onChange(eventValue);
   };
 
-  onChange = (e) => {
-    const { onChange } = this.props;
-    const { value } = e.target;
-    // console.log(value);
-    onChange(value);
-  };
-
-  render() {
-    const { value } = this.props;
-
-    return (
-      <div className="slider" id="sliderComponent" style={styles.Slider}>
-        <SliderInput onChange={this.onChange} value={value} />
-        <div className="zoomLevel" style={styles.zoomLevel}>
-          {value}
-        </div>
+  return (
+    <div className="slider" id="sliderComponent" style={styles.Slider}>
+      <SliderInput onChange={onValueChange} value={value} />
+      <div className="zoomLevel" style={styles.zoomLevel}>
+        {value}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 Slider.propTypes = {
   onChange: PropTypes.func.isRequired,

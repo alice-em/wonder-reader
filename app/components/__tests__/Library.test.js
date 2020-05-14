@@ -4,6 +4,11 @@ import React from 'react';
 
 import { Library } from '../Library';
 
+jest.mock('react', () => ({
+  ...jest.requireActual('react'),
+  useState: jest.fn(v => [v, jest.fn()]),
+}));
+
 Enzyme.configure({ adapter: new Adapter() });
 
 const props = {
@@ -20,15 +25,5 @@ describe('Library', () => {
   it('should render', () => {
     const wrapper = shallow(<Library {...props} />);
     expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should update state with { root: filename }', () => {
-    const sampleFilepath = 'sampleFilepath';
-    const sampleLibrary = new Library({ loadedLibrary: 'root' });
-    sampleLibrary.setState = jest.fn();
-    sampleLibrary.updateRoot(sampleFilepath);
-    expect(sampleLibrary.setState).toHaveBeenCalledWith({
-      root: sampleFilepath,
-    });
   });
 });

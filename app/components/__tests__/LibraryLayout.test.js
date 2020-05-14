@@ -30,8 +30,6 @@ const props = {
 };
 
 const sampleContent = {
-  basename: '',
-  bookmark: '',
   contents: [],
   dirname: '',
   fullpath: null,
@@ -82,28 +80,6 @@ describe('LibraryLayout', () => {
           { properties: ['openDirectory'] },
           wrapper.updateRoot,
         );
-      });
-    });
-
-    describe('saveContentDataToParent', () => {
-      it('should set content data to state', (done) => {
-        const wrapper = new LibraryLayout(props);
-        wrapper.setState = jest.fn();
-        wrapper.saveContentDataToParent(sampleContent);
-        expect(wrapper.setState).toHaveBeenCalledWith(sampleContent);
-        done();
-      });
-    });
-
-    describe('saveContentsDataToParent', () => {
-      it('should set new contents data to state', (done) => {
-        const wrapper = new LibraryLayout(props);
-        wrapper.setState = jest.fn();
-        wrapper.saveContentsDataToParent([sampleContent]);
-        expect(wrapper.setState).toHaveBeenCalledWith({
-          contents: { ...sampleContent, contents: [sampleContent] },
-        });
-        done();
       });
     });
 
