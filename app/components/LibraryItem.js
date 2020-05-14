@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-import { FaPercent } from 'react-icons/lib/fa';
+import { FaPercent } from 'react-icons/fa';
 
 import LibraryItemIcon from './LibraryItemIcon';
 // import Bookmark from './Bookmark.js';

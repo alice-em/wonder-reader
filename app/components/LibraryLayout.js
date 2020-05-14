@@ -2,7 +2,7 @@ import IconButton from '@material-ui/core/IconButton';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import electron from 'electron';
-import { FaClose, FaFolderOpen, FaLevelUp } from 'react-icons/lib/fa';
+import { FaFolderOpen, FaLevelUpAlt, FaTimes } from 'react-icons/fa';
 
 import LibraryHeader from './LibraryHeader';
 import LibraryTable from './LibraryTable';
@@ -111,14 +111,14 @@ class LibraryLayout extends Component {
               <FaFolderOpen />
             </IconButton>
             <IconButton onClick={this.setParentAsLibrary} color="primary">
-              <FaLevelUp />
+              <FaLevelUpAlt />
             </IconButton>
             <IconButton
               onClick={this.props.closeLibrary}
               color="primary"
               style={styles.closeButton}
             >
-              <FaClose />
+              <FaTimes />
             </IconButton>
           </div>
         </LibraryHeader>

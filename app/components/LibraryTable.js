@@ -5,7 +5,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import { FaPercent } from 'react-icons/lib/fa';
+import { FaPercent } from 'react-icons/fa';
 
 import LibraryItem from './LibraryItem';
 
