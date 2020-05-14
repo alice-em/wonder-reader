@@ -1,13 +1,7 @@
 // @flow
-import React, { Component } from 'react';
+import React from 'react';
 import Home from '../components/App';
 
-type Props = {};
+const HomePage = () => <Home />;
 
-export default class HomePage extends Component<Props> {
-  props: Props;
-
-  render() {
-    return <Home />;
-  }
-}
+export default HomePage;

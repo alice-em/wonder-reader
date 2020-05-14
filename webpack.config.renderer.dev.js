@@ -42,9 +42,8 @@ if (!requiredByDLLConfig && !(fs.existsSync(dll) && fs.existsSync(manifest))) {
 
 export default merge.smart(baseConfig, {
   devtool: 'inline-source-map',
-
+  // hot: true,
   mode: 'development',
-
   target: 'electron-renderer',
 
   entry: [
@@ -252,16 +251,17 @@ export default merge.smart(baseConfig, {
   },
 
   devServer: {
-    port,
-    publicPath,
-    compress: true,
-    noInfo: true,
-    stats: 'errors-only',
+    compress: false,
+    contentBase: path.join(__dirname, 'dist'),
+    headers: { 'Access-Control-Allow-Origin': '*' },
+    hot: true,
     inline: true,
     lazy: false,
-    hot: true,
-    headers: { 'Access-Control-Allow-Origin': '*' },
-    contentBase: path.join(__dirname, 'dist'),
+    // mode: 'development',
+    noInfo: true,
+    port,
+    publicPath,
+    stats: 'errors-only',
     watchOptions: {
       aggregateTimeout: 300,
       ignored: /node_modules/,
