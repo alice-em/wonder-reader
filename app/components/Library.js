@@ -15,7 +15,7 @@ const styles = {
   PaperProps: {
     borderRadius: '0px 0px 0px 15px',
     margin: 'auto',
-    maxWidth: '960px',
+    // maxWidth: '960px',
   },
 };
 

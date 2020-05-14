@@ -135,7 +135,7 @@
     ]
   },
   "devDependencies": {
-    "@material-ui/core": "1.2.1",
+    "@material-ui/core": "4.9.14",
     "babel-core": "6.26.3",
     "babel-eslint": "8.2.3",
     "babel-jest": "23.0.1",
@@ -196,7 +196,7 @@
     "mkdirp": "0.5.1",
     "node-unrar": "0.1.5",
     "npm-logical-tree": "1.2.1",
-    "prettier": "1.13.5",
+    "prettier": "2.0.5",
     "prop-types": "15.7.2",
     "react-icons": "3.10.0",
     "react-test-renderer": "16.12.0",
