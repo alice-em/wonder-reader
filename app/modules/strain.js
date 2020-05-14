@@ -19,10 +19,9 @@ const sortArrayByAlpha = ARRAY => [...ARRAY].sort(polaritySort);
 
 // Cleans out non image files from ARRAY
 const strainer = fileTypes => files =>
-  files.filter(isSomething(fileTypes)).sort(polaritySort);
+  sortArrayByAlpha(files.filter(isSomething(fileTypes)));
 
 const strainComics = strainer(comicTypes);
-const strainOnlyComics = strainer(comicTypes);
 const strainImages = strainer(imageTypes);
 
 export {
@@ -32,6 +31,5 @@ export {
   isImage,
   sortArrayByAlpha,
   strainComics,
-  strainOnlyComics,
   strainImages,
 };
