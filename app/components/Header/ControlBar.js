@@ -7,8 +7,8 @@ import {
   FaAngleLeft,
   FaAngleRight,
   FaBook,
-  FaRegMinusSquare,
-  FaRegSquare,
+  FaPause,
+  FaStop,
 } from 'react-icons/fa';
 
 import Button from './Button';
@@ -31,8 +31,8 @@ const ControlBar = ({
       <Button onClick={openLibrary}>
         <FaBook />
       </Button>
-      <Button onClick={changePageCount} rotation={90}>
-        {pageCount === 2 ? <FaRegMinusSquare /> : <FaRegSquare />}
+      <Button onClick={changePageCount}>
+        {pageCount === 2 ? <FaPause /> : <FaStop />}
       </Button>
       <Button onClick={openPrevComic}>
         <FaAngleDoubleLeft />
