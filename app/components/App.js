@@ -1,8 +1,8 @@
 import fs from 'fs';
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import path from 'path';
 import React, { Component } from 'react';
 import sizeOf from 'image-size';
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 
 import encodePath from '../modules/encodePath';
 import File from '../modules/File';

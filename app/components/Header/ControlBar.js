@@ -1,4 +1,3 @@
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {
@@ -10,6 +9,7 @@ import {
   FaPause,
   FaStop,
 } from 'react-icons/fa';
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 
 import Button from './Button';
 import Slider from './Slider';

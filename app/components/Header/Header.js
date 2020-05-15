@@ -10,7 +10,7 @@ import headerStyle from '../headerStyle';
 const Header = props => (
   <AppBar>
     <Toolbar>
-      <Typography variant="title" style={headerStyle}>
+      <Typography variant="h5" style={headerStyle}>
         Wonder Reader
       </Typography>
       <ControlBar {...props} />
