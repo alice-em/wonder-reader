@@ -235,8 +235,8 @@ export default class App extends Component {
     if (comic.error) {
       this.throwError(true, comic.errorMessage);
     } else {
-      this.generatePages(comic.tempdir, (page) => {
-        this.postGeneratePages(page, comic);
+      this.generatePages(comic.tempdir, (pages) => {
+        this.postGeneratePages(pages, comic);
       });
     }
   };
