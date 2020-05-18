@@ -33,7 +33,12 @@ Context.displayName = 'Context';
 const ConnectContext = ({ children }) => {
   const [state, updateState] = useState(defaultState);
 
-  const setState = newState => updateState({ ...state, ...newState });
+  // const setState = newState => updateState({ ...state, ...newState });
+  const setState = (newState) => {
+    console.log('currentState:', state);
+    console.log('incomingState:', newState);
+    updateState({ ...state, ...newState });
+  };
 
   const {
     centerfolds,
@@ -106,15 +111,20 @@ const ConnectContext = ({ children }) => {
 
   // openAdjacentComic Functions
   const openComic = (fullpath) => {
+    console.log(fullpath)
     const Comic = new File(fullpath);
+    console.log(Comic);
     setState({ isLoading: true });
     Comic.extract((newOpenedComic) => {
+      console.log(newOpenedComic)
       if (newOpenedComic.error) {
         throwError(true, newOpenedComic.errorMessage);
       } else {
         fs.readdir(newOpenedComic.tempdir, (err, files) => {
+          console.log(files);
           const generatedPages = files.map(mapPages(newOpenedComic.tempdir));
           const pagePaths = generatedPages.map(({ pagePath }) => pagePath);
+
           setState({
             centerfolds: generateCenterfolds(pagePaths),
             openedComic: newOpenedComic,
