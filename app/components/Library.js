@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 
+import Context from '../context/ContextFactory';
 import LibraryLayout from './LibraryLayout';
 
 const styles = {
@@ -23,7 +24,6 @@ const Library = ({
   classes,
   closeDrawer,
   loadedLibrary,
-  open,
   openComic,
   saveContentDataToMain,
   style,
@@ -31,27 +31,31 @@ const Library = ({
   const [root, updateRoot] = useState(loadedLibrary);
 
   return (
-    <div className="Library" style={style}>
-      <Drawer
-        anchor="top"
-        open={open}
-        onClose={closeDrawer}
-        PaperProps={{ style: styles.PaperProps }}
-        variant="temporary"
-        transitionDuration={125}
-      >
-        <div tabIndex={0} role="button" onKeyDown={closeDrawer}>
-          <LibraryLayout
-            className={classes.list}
-            closeLibrary={closeDrawer}
-            openComic={openComic}
-            root={root}
-            saveContentDataToParent={saveContentDataToMain}
-            updateRoot={updateRoot}
-          />
+    <Context.Consumer>
+      {({ state }) => (
+        <div className="Library" style={style}>
+          <Drawer
+            anchor="top"
+            open={state.top}
+            onClose={closeDrawer}
+            PaperProps={{ style: styles.PaperProps }}
+            variant="temporary"
+            transitionDuration={125}
+          >
+            <div tabIndex={0} role="button" onKeyDown={closeDrawer}>
+              <LibraryLayout
+                className={classes.list}
+                closeLibrary={closeDrawer}
+                openComic={openComic}
+                root={root}
+                saveContentDataToParent={saveContentDataToMain}
+                updateRoot={updateRoot}
+              />
+            </div>
+          </Drawer>
         </div>
-      </Drawer>
-    </div>
+      )}
+    </Context.Consumer>
   );
 };
 
@@ -64,7 +68,6 @@ Library.propTypes = {
   classes: PropTypes.object.isRequired, // eslint-disable-line
   closeDrawer: PropTypes.func.isRequired,
   loadedLibrary: PropTypes.string,
-  open: PropTypes.bool.isRequired,
   openComic: PropTypes.func.isRequired,
   saveContentDataToMain: PropTypes.func.isRequired,
   style: PropTypes.objectOf(PropTypes.object.isRequired),

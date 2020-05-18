@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 
+import Context from '../../context/ContextFactory';
 import SliderInput from '../SliderInput';
 
 const boxShadow = [
@@ -37,7 +37,7 @@ const blurSliderInput = () => {
   document.getElementById('SliderInput').blur();
 };
 
-const Slider = ({ onChange, value }) => {
+const Slider = () => {
   useEffect(() => {
     if (sliderComponent) {
       sliderComponent.addEventListener('mouseleave', blurSliderInput);
@@ -50,23 +50,23 @@ const Slider = ({ onChange, value }) => {
     };
   });
 
-  const onValueChange = ({ target: { value: eventValue } }) => {
-    onChange(eventValue);
-  };
-
   return (
-    <div className="slider" id="sliderComponent" style={styles.Slider}>
-      <SliderInput onChange={onValueChange} value={value} />
-      <div className="zoomLevel" style={styles.zoomLevel}>
-        {value}
-      </div>
-    </div>
+    <Context.Consumer>
+      {({ state, setState }) => (
+        <div className="slider" id="sliderComponent" style={styles.Slider}>
+          <SliderInput
+            onChange={({ target: { value: eventValue } }) => {
+              setState({ zoomLevel: Number(eventValue) });
+            }}
+            value={state.zoomLevel}
+          />
+          <div className="zoomLevel" style={styles.zoomLevel}>
+            {state.zoomLevel}
+          </div>
+        </div>
+      )}
+    </Context.Consumer>
   );
-};
-
-Slider.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  value: PropTypes.number.isRequired,
 };
 
 export default Slider;

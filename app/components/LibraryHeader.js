@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 
 import headerStyle from './headerStyle';
-import { buttonStyle, buttonTheme } from './buttonStyle';
+import { buttonStyle, buttonTheme } from './Header/Buttons/buttonStyle';
 
 const LibraryHeader = ({ children, position, title }) => (
   <AppBar style={{ position }}>

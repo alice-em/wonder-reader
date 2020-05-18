@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 
+import Context from '../context/ContextFactory';
+
 /* istanbul ignore next */
 const styles = theme => ({
   LoaderElement: {
@@ -29,25 +31,27 @@ const styles = theme => ({
   }),
 });
 
-const PaperElement = ({ classes }) => (
-  <div style={styles.LoaderElement}>
-    <Paper className={classes.root} elevation={4} style={styles.Paper}>
-      <CircularProgress
-        className={classes.progress}
-        color="secondary"
-        size={50}
-      />
-    </Paper>
-  </div>
+const Loading = ({ classes }) => (
+  <Context.Consumer>
+    {({ state }) =>
+      state.isLoading && (
+        <div style={styles.LoaderElement}>
+          <Paper className={classes.root} elevation={4} style={styles.Paper}>
+            <CircularProgress
+              className={classes.progress}
+              color="secondary"
+              size={50}
+            />
+          </Paper>
+        </div>
+      )
+    }
+  </Context.Consumer>
 );
-
-const Loading = ({ classes, isLoading }) =>
-  isLoading && <PaperElement classes={classes} />;
 
 Loading.propTypes = {
   classes: PropTypes.object.isRequired, // eslint-disable-line
-  isLoading: PropTypes.bool.isRequired,
 };
 
-export { Loading, PaperElement };
+export { Loading };
 export default withStyles(styles)(Loading);

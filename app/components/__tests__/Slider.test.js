@@ -8,6 +8,7 @@ jest.mock('react', () => ({
   ...jest.requireActual('react'),
   useEffect: jest.fn(),
 }));
+jest.mock('../../context/ContextFactory');
 
 Enzyme.configure({ adapter: new Adapter() });
 
