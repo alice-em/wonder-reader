@@ -7,7 +7,7 @@
       "jsx": true
     }
   },
-  "extends": ["airbnb", "prettier"],
+  "extends": ["airbnb", "plugin:react-hooks/recommended", "prettier"],
   "env": {
     "browser": true,
     "node": true
@@ -51,7 +51,14 @@
       }
     ]
   },
-  "plugins": ["flowtype", "import", "promise", "compat", "react"],
+  "plugins": [
+    "flowtype",
+    "import",
+    "promise",
+    "compat",
+    "react",
+    "react-hooks"
+  ],
   "settings": {
     "import/resolver": {
       "webpack": {

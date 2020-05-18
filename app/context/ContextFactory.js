@@ -30,7 +30,7 @@ const generateImages = pages =>
 const Context = createContext();
 Context.displayName = 'Context';
 
-const connectContext = (Component) => {
+const ConnectContext = ({ children }) => {
   const [state, updateState] = useState(defaultState);
 
   const setState = newState => updateState({ ...state, newState });
@@ -228,10 +228,10 @@ const connectContext = (Component) => {
         turnPageRight,
       }}
     >
-      {Component}
+      {children}
     </Context.Provider>
   );
 };
 
-export { connectContext };
+export { ConnectContext };
 export default Context;
