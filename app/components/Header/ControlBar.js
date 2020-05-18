@@ -1,7 +1,7 @@
 import React from 'react';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 
-import Button from './Buttons';
+import * as Button from './Buttons';
 import Slider from './Slider';
 import { buttonStyle, buttonTheme } from './Buttons/buttonStyle';
 

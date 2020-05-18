@@ -33,7 +33,8 @@ Context.displayName = 'Context';
 const ConnectContext = ({ children }) => {
   const [state, updateState] = useState(defaultState);
 
-  const setState = newState => updateState({ ...state, newState });
+  const setState = newState => updateState({ ...state, ...newState });
+
   const {
     centerfolds,
     currentPageIndex,
