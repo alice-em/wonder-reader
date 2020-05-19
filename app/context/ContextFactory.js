@@ -12,7 +12,11 @@ import defaultState from './defaultState';
 
 const mapPages = tempdir => (file, key) => {
   const pagePath = path.join(tempdir, file);
-
+  console.log('pagePath', {
+    tempdir,
+    file,
+    key,
+  });
   return {
     encodedPagePath: encodePath(pagePath),
     key,
@@ -34,29 +38,47 @@ const ConnectContext = ({ children }) => {
   const [state, updateState] = useState(defaultState);
 
   // const setState = newState => updateState({ ...state, ...newState });
-  const setState = (newState) => {
+  const setState = async (newState) => {
     console.log('currentState:', state);
     console.log('incomingState:', newState);
-    updateState({ ...state, ...newState });
+    try {
+      await updateState({ ...state, ...newState });
+    } catch (e) {
+      throw e;
+    }
   };
 
-  const {
-    centerfolds,
-    currentPageIndex,
-    openedComic,
-    pageCount,
-    pages,
-  } = state;
+  // const {
+  //   centerfolds,
+  //   currentPageIndex,
+  //   openedComic,
+  //   pageCount,
+  //   pages,
+  // } = state;
 
   // Core Shared Functionality
   const throwError = (error, errorMessage) => {
     if (error) {
       // console.log(errorMessage);
-      setState({ errorMessage });
+      setState({ errorMessage }).catch(console.log);
     }
   };
 
-  const generateEncodedPages = (newPageIndex, pagesToDisplay) => {
+  const isCenterfold = (index) => {
+    const { centerfolds } = state;
+    return centerfolds.includes(index);
+  };
+
+  const isCenterfoldsComing = () => {
+    const { currentPageIndex } = state;
+    return isCenterfold(currentPageIndex) || isCenterfold(currentPageIndex + 1);
+  };
+
+  const setCurrentPages = (
+    newPageIndex,
+    pagesToDisplay,
+    { openedComic, pageCount, pages, ...otherState } = state,
+  ) => {
     const encodedPages = [];
     const pagesToRender = Math.min(pageCount, pagesToDisplay);
     for (let i = 0; i < pagesToRender; i += 1) {
@@ -74,72 +96,71 @@ const ConnectContext = ({ children }) => {
           width: width * ratio,
           height: height * ratio,
         };
+        console.log(encodedPages);
       }
     }
-    return encodedPages;
-  };
-
-  const isCenterfold = index => centerfolds.includes(index);
-
-  const isCenterfoldsComing = () =>
-    isCenterfold(currentPageIndex) || isCenterfold(currentPageIndex + 1);
-
-  const setCurrentPages = (pageIndex, pagesToDisplay) => {
-    // console.log('setCurrentPages', newPageCount);
-    const encodedPages = generateEncodedPages(pageIndex, pagesToDisplay);
     setState({
-      currentPageIndex: pageIndex,
+      ...otherState,
+      currentPageIndex: newPageIndex,
       encodedPages,
-    });
+      openedComic,
+      pageCount,
+      pages,
+    }).catch(throwError);
   };
 
   // ChangePageCount Function
   const changePageCount = () => {
+    const { currentPageIndex, openedComic, pageCount } = state;
     const newPageCount = pageCount === 2 ? 1 : 2;
 
-    setState({ pageCount: newPageCount });
     if (openedComic.name !== null) {
-      if (newPageCount === 2) {
-        if (isCenterfoldsComing()) {
-          setCurrentPages(currentPageIndex, 1);
-        }
-      } else {
-        setCurrentPages(currentPageIndex, newPageCount);
-      }
+      setState({ pageCount: newPageCount })
+        .then(() => {
+          if (newPageCount === 2) {
+            if (isCenterfoldsComing()) {
+              return setCurrentPages(currentPageIndex, 1);
+            }
+          }
+          return setCurrentPages(currentPageIndex, newPageCount);
+        })
+        .catch(throwError);
     }
   };
 
   // openAdjacentComic Functions
   const openComic = (fullpath) => {
-    console.log(fullpath)
+    const { pageCount } = state;
     const Comic = new File(fullpath);
-    console.log(Comic);
-    setState({ isLoading: true });
-    Comic.extract((newOpenedComic) => {
-      console.log(newOpenedComic)
-      if (newOpenedComic.error) {
-        throwError(true, newOpenedComic.errorMessage);
-      } else {
-        fs.readdir(newOpenedComic.tempdir, (err, files) => {
-          console.log(files);
-          const generatedPages = files.map(mapPages(newOpenedComic.tempdir));
-          const pagePaths = generatedPages.map(({ pagePath }) => pagePath);
+    setState({ isLoading: true })
+      .then(() => Comic.extract((newOpenedComic) => {
+          if (newOpenedComic.error) {
+            throwError(true, newOpenedComic.errorMessage);
+          } else {
+            fs.readdir(newOpenedComic.tempdir, (err, files) => {
+              const generatedPages = files.map(
+                mapPages(newOpenedComic.tempdir),
+              );
+              const pagePaths = generatedPages.map(({ pagePath }) => pagePath);
 
-          setState({
-            centerfolds: generateCenterfolds(pagePaths),
-            openedComic: newOpenedComic,
-            images: generateImages(pages),
-            isLoading: false,
-            pages: generatedPages,
-            top: false,
-          });
-          setCurrentPages(0, isCenterfoldsComing(0) || pageCount === 1 ? 1 : 2);
-        });
-      }
-    });
+              const newState = {
+                centerfolds: generateCenterfolds(pagePaths),
+                openedComic: newOpenedComic,
+                images: generateImages(generatedPages),
+                isLoading: false,
+                pages: generatedPages,
+                top: false,
+              };
+              setCurrentPages(0, pageCount, newState);
+            });
+          }
+        }))
+      .catch(throwError);
   };
 
   const openAdjacentComic = (polarity) => {
+    const { openedComic } = state;
+
     if (openedComic.name !== null) {
       fs.readdir(path.dirname(openedComic.origin), (err, files) => {
         const strainedComics = strainComics(files);
@@ -156,9 +177,13 @@ const ConnectContext = ({ children }) => {
   };
 
   // TurnPage Functions
-  const shouldPageTurnLeft = () => currentPageIndex !== 0;
+  const shouldPageTurnLeft = () => {
+    const { currentPageIndex } = state;
+    return currentPageIndex !== 0;
+  };
 
   const shouldPageTurnRight = () => {
+    const { currentPageIndex, pageCount, pages } = state;
     const ultimatePage = pages.length - 1;
     const penultimatePage = pages.length - 2;
 
@@ -174,6 +199,13 @@ const ConnectContext = ({ children }) => {
   };
 
   const turnPage = (polarity) => {
+    const {
+      centerfolds,
+      currentPageIndex,
+      openedComic,
+      pageCount,
+      pages,
+    } = state;
     if (openedComic.name.length > 0) {
       const { newPageIndex, pagesToDisplay } = turnPage({
         currentPageIndex,
@@ -212,6 +244,7 @@ const ConnectContext = ({ children }) => {
     window.addEventListener(
       'keydown',
       (e) => {
+        const { openedComic } = state;
         const isComicActive = openedComic.name !== null;
         const isActiveElemInput = document.activeElement.tagName === 'input';
 

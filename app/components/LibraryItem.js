@@ -35,11 +35,11 @@ const LibraryItem = ({ basename, dirname, id, isDirectory, onRowClick }) => (
     onClick={onRowClick}
     style={styles.TableRow}
   >
-    <TableCell numeric padding="checkbox" style={styles.wide}>
+    <TableCell padding="checkbox" style={styles.wide}>
       <LibraryItemIcon iconSize={30} isDirectory={isDirectory} />
     </TableCell>
     <TableCell style={styles.three33}>{basename}</TableCell>
-    <TableCell numeric style={styles.bbb}>
+    <TableCell style={styles.bbb}>
       {dirname}
     </TableCell>
     <TableCell padding="checkbox" style={styles.wide}>

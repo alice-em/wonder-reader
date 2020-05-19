@@ -37,5 +37,5 @@ export default {
   isLoading: false,
 
   // Image cache
-  images: [], // eslint-disable-line react/no-unused-state
+  images: [],
 };

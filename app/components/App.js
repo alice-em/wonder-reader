@@ -28,7 +28,7 @@ const App = () => (
         <Context.Consumer>
           {({ state }) => (
             <PageViewer
-              pages={state.encodedPages}
+              encodedPages={state.encodedPages}
               zoomLevel={state.zoomLevel}
             />
           )}

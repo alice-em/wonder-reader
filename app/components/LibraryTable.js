@@ -25,7 +25,7 @@ const HeaderRow = () => (
     <TableRow style={styles.font}>
       <TableCell padding="checkbox" />
       <TableCell>Name</TableCell>
-      <TableCell numeric>Directory</TableCell>
+      <TableCell>Directory</TableCell>
       <TableCell padding="checkbox">
         <FaPercent />
       </TableCell>

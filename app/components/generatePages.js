@@ -3,11 +3,11 @@ import React from 'react';
 
 import Page from './Page';
 
-const generateTotalSize = pages => pages.reduce((a, { width }) => a + width, 0);
+const generateTotalSize = encodedPages => encodedPages.reduce((a, { width }) => a + width, 0);
 
-const generatePages = ({ pages }) => {
-  const totalSize = generateTotalSize(pages);
-  return pages.map(({ key, page, width }) => (
+const generatePages = ({ encodedPages }) => {
+  const totalSize = generateTotalSize(encodedPages);
+  return encodedPages.map(({ key, page, width }) => (
     <Page
       key={key}
       id={`page${key}`}
