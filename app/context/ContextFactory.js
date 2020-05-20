@@ -38,15 +38,7 @@ const ConnectContext = ({ children }) => {
   const [state, updateState] = useState(defaultState);
 
   // const setState = newState => updateState({ ...state, ...newState });
-  const setState = async (newState) => {
-    console.log('currentState:', state);
-    console.log('incomingState:', newState);
-    try {
-      await updateState({ ...state, ...newState });
-    } catch (e) {
-      throw e;
-    }
-  };
+  const setState = newState => updateState(currentState => ({ ...currentState, ...newState }));
 
   // const {
   //   centerfolds,
@@ -60,7 +52,7 @@ const ConnectContext = ({ children }) => {
   const throwError = (error, errorMessage) => {
     if (error) {
       // console.log(errorMessage);
-      setState({ errorMessage }).catch(console.log);
+      setState({ errorMessage });
     }
   };
 
@@ -74,11 +66,9 @@ const ConnectContext = ({ children }) => {
     return isCenterfold(currentPageIndex) || isCenterfold(currentPageIndex + 1);
   };
 
-  const setCurrentPages = (
-    newPageIndex,
-    pagesToDisplay,
-    { openedComic, pageCount, pages, ...otherState } = state,
-  ) => {
+  const setCurrentPages = (newPageIndex, pagesToDisplay) => {
+    const { openedComic, pageCount, pages } = state;
+
     const encodedPages = [];
     const pagesToRender = Math.min(pageCount, pagesToDisplay);
     for (let i = 0; i < pagesToRender; i += 1) {
@@ -100,13 +90,12 @@ const ConnectContext = ({ children }) => {
       }
     }
     setState({
-      ...otherState,
       currentPageIndex: newPageIndex,
       encodedPages,
       openedComic,
       pageCount,
       pages,
-    }).catch(throwError);
+    });
   };
 
   // ChangePageCount Function
@@ -115,16 +104,13 @@ const ConnectContext = ({ children }) => {
     const newPageCount = pageCount === 2 ? 1 : 2;
 
     if (openedComic.name !== null) {
-      setState({ pageCount: newPageCount })
-        .then(() => {
-          if (newPageCount === 2) {
-            if (isCenterfoldsComing()) {
-              return setCurrentPages(currentPageIndex, 1);
-            }
-          }
-          return setCurrentPages(currentPageIndex, newPageCount);
-        })
-        .catch(throwError);
+      setState({ pageCount: newPageCount });
+      if (newPageCount === 2) {
+        if (isCenterfoldsComing()) {
+          setCurrentPages(currentPageIndex, 1);
+        }
+      }
+      setCurrentPages(currentPageIndex, newPageCount);
     }
   };
 
@@ -132,30 +118,27 @@ const ConnectContext = ({ children }) => {
   const openComic = (fullpath) => {
     const { pageCount } = state;
     const Comic = new File(fullpath);
-    setState({ isLoading: true })
-      .then(() => Comic.extract((newOpenedComic) => {
-          if (newOpenedComic.error) {
-            throwError(true, newOpenedComic.errorMessage);
-          } else {
-            fs.readdir(newOpenedComic.tempdir, (err, files) => {
-              const generatedPages = files.map(
-                mapPages(newOpenedComic.tempdir),
-              );
-              const pagePaths = generatedPages.map(({ pagePath }) => pagePath);
+    setState({ isLoading: true });
+    Comic.extract((newOpenedComic) => {
+      if (newOpenedComic.error) {
+        throwError(true, newOpenedComic.errorMessage);
+      } else {
+        fs.readdir(newOpenedComic.tempdir, (err, files) => {
+          const generatedPages = files.map(mapPages(newOpenedComic.tempdir));
+          const pagePaths = generatedPages.map(({ pagePath }) => pagePath);
 
-              const newState = {
-                centerfolds: generateCenterfolds(pagePaths),
-                openedComic: newOpenedComic,
-                images: generateImages(generatedPages),
-                isLoading: false,
-                pages: generatedPages,
-                top: false,
-              };
-              setCurrentPages(0, pageCount, newState);
-            });
-          }
-        }))
-      .catch(throwError);
+          const newState = {
+            centerfolds: generateCenterfolds(pagePaths),
+            openedComic: newOpenedComic,
+            images: generateImages(generatedPages),
+            isLoading: false,
+            pages: generatedPages,
+            top: false,
+          };
+          setCurrentPages(0, pageCount, newState);
+        });
+      }
+    });
   };
 
   const openAdjacentComic = (polarity) => {
@@ -166,6 +149,7 @@ const ConnectContext = ({ children }) => {
         const strainedComics = strainComics(files);
         const newIndex = strainedComics.indexOf(openedComic.name) + polarity;
         if (newIndex > -1 && newIndex < strainedComics.length) {
+
           const newComicFilepath = path.join(
             path.dirname(openedComic.origin),
             strainedComics[newIndex],
@@ -233,10 +217,15 @@ const ConnectContext = ({ children }) => {
   };
 
   const arrowKeyTurnPage = (code) => {
-    if (code === 'ArrowRight') {
-      turnPageRight();
-    } else if (code === 'ArrowLeft') {
-      turnPageLeft();
+    switch (code) {
+      case 'ArrowRight':
+        turnPageRight();
+        break;
+      case 'ArrowLeft':
+        turnPageLeft();
+        break;
+      default:
+        break;
     }
   };
 

@@ -3,19 +3,19 @@ import electron from 'electron';
 import Enzyme, { shallow } from 'enzyme';
 import React from 'react';
 
-import LibraryLayout from '../LibraryLayout';
-import LibraryTable from '../LibraryTable';
+import Layout from '../Layout';
+import Table from '../Table';
 
 const {
   generateNestedContentFromFilepath,
-} = require('../../modules/generate.js');
+} = require('../../../modules/generate.js');
 
 jest.mock('electron', () => ({
   remote: {
     dialog: { showOpenDialog: jest.fn() },
   },
 }));
-jest.mock('../../modules/generate.js', () => ({
+jest.mock('../../../modules/generate.js', () => ({
   generateNestedContentFromFilepath: jest.fn(),
 }));
 
@@ -24,7 +24,7 @@ Enzyme.configure({ adapter: new Adapter() });
 const props = {
   closeLibrary: jest.fn(),
   openComic: jest.fn(),
-  root: '.',
+  loadedLibrary: '.',
   saveContentDataToParent: jest.fn(),
   updateRoot: jest.fn(),
 };
@@ -35,19 +35,19 @@ const sampleContent = {
   fullpath: null,
   id: 'libraryRoot',
   isDirectory: true,
-  root: '',
+  root: '.',
 };
 
-describe('LibraryLayout', () => {
+describe('Layout', () => {
   it('should render', () => {
-    const wrapper = shallow(<LibraryLayout {...props} />);
+    const wrapper = shallow(<Layout {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render a LibraryTable with a truthy state.fullpath', () => {
-    const wrapper = shallow(<LibraryLayout {...props} />);
+  it('should render a Table with a truthy state.fullpath', () => {
+    const wrapper = shallow(<Layout {...props} />);
     wrapper.setState({ fullpath: 'sample' });
-    expect(wrapper.find(LibraryTable)).toHaveLength(1);
+    expect(wrapper.find(Table)).toHaveLength(1);
   });
 
   describe('Class Functions', () => {
@@ -58,14 +58,14 @@ describe('LibraryLayout', () => {
         isDirectory,
       });
       it('should updateContent if target.isDirectory', () => {
-        const wrapper = new LibraryLayout(props);
+        const wrapper = new Layout(props);
         wrapper.updateContent = jest.fn();
         wrapper.onClick(createArguments(true));
         expect(wrapper.updateContent).toHaveBeenCalledWith(fullpath);
       });
 
       it('should props.openComic if !target.isDirectory', () => {
-        const wrapper = new LibraryLayout(props);
+        const wrapper = new Layout(props);
         wrapper.updateContent = jest.fn();
         wrapper.onClick(createArguments(false));
         expect(props.openComic).toHaveBeenCalledWith(fullpath);
@@ -74,7 +74,7 @@ describe('LibraryLayout', () => {
 
     describe('openDirectory', () => {
       it('should show dialog', () => {
-        const wrapper = new LibraryLayout(props);
+        const wrapper = new Layout(props);
         wrapper.openDirectory();
         expect(electron.remote.dialog.showOpenDialog).toHaveBeenCalledWith(
           { properties: ['openDirectory'] },
@@ -85,7 +85,7 @@ describe('LibraryLayout', () => {
 
     describe('setContentToState', () => {
       it('sets state to content argument', (done) => {
-        const wrapper = new LibraryLayout(props);
+        const wrapper = new Layout(props);
         wrapper.setState = jest.fn();
         wrapper.setContentToState(sampleContent);
         expect(wrapper.setState).toHaveBeenCalledWith(sampleContent);
@@ -95,7 +95,7 @@ describe('LibraryLayout', () => {
 
     describe('setParentAsLibrary', () => {
       it('sets state based on dirname state', (done) => {
-        const wrapper = new LibraryLayout(props);
+        const wrapper = new Layout(props);
         wrapper.setParentAsLibrary();
         expect(wrapper.state).toEqual(sampleContent);
         done();
@@ -104,7 +104,7 @@ describe('LibraryLayout', () => {
 
     describe('updateContent', () => {
       it('should generateNestedContent and set that data to state', () => {
-        const wrapper = new LibraryLayout(props);
+        const wrapper = new Layout(props);
         wrapper.setContentToState = jest.fn();
         wrapper.updateContent('.');
         expect(generateNestedContentFromFilepath).toHaveBeenCalledWith(
@@ -117,7 +117,7 @@ describe('LibraryLayout', () => {
     describe('updateRoot', () => {
       it('should updateContent with a valid [filepath]', () => {
         const sampleFilepath = 'sample';
-        const wrapper = new LibraryLayout(props);
+        const wrapper = new Layout(props);
         wrapper.updateContent = jest.fn();
         wrapper.updateRoot([sampleFilepath]);
         expect(wrapper.updateContent).toHaveBeenCalledWith(sampleFilepath);
@@ -125,7 +125,7 @@ describe('LibraryLayout', () => {
 
       it('should not updateContent with a invalid [filepath]', () => {
         const sampleFilepath = '';
-        const wrapper = new LibraryLayout(props);
+        const wrapper = new Layout(props);
         wrapper.updateContent = jest.fn();
         wrapper.updateRoot([sampleFilepath]);
         expect(wrapper.updateContent).not.toHaveBeenCalled();

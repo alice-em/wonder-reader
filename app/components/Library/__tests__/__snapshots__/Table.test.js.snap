@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LibraryTable HeaderRow should render 1`] = `
+exports[`Table HeaderRow should render 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
@@ -30,9 +30,7 @@ ShallowWrapper {
         <ForwardRef(WithStyles)>
           Name
         </ForwardRef(WithStyles)>
-        <ForwardRef(WithStyles)
-          numeric={true}
-        >
+        <ForwardRef(WithStyles)>
           Directory
         </ForwardRef(WithStyles)>
         <ForwardRef(WithStyles)
@@ -55,9 +53,7 @@ ShallowWrapper {
           <ForwardRef(WithStyles)>
             Name
           </ForwardRef(WithStyles)>,
-          <ForwardRef(WithStyles)
-            numeric={true}
-          >
+          <ForwardRef(WithStyles)>
             Directory
           </ForwardRef(WithStyles)>,
           <ForwardRef(WithStyles)
@@ -732,7 +728,6 @@ ShallowWrapper {
           "nodeType": "function",
           "props": Object {
             "children": "Directory",
-            "numeric": true,
           },
           "ref": null,
           "rendered": "Directory",
@@ -2036,9 +2031,7 @@ ShallowWrapper {
           <ForwardRef(WithStyles)>
             Name
           </ForwardRef(WithStyles)>
-          <ForwardRef(WithStyles)
-            numeric={true}
-          >
+          <ForwardRef(WithStyles)>
             Directory
           </ForwardRef(WithStyles)>
           <ForwardRef(WithStyles)
@@ -2061,9 +2054,7 @@ ShallowWrapper {
             <ForwardRef(WithStyles)>
               Name
             </ForwardRef(WithStyles)>,
-            <ForwardRef(WithStyles)
-              numeric={true}
-            >
+            <ForwardRef(WithStyles)>
               Directory
             </ForwardRef(WithStyles)>,
             <ForwardRef(WithStyles)
@@ -2738,7 +2729,6 @@ ShallowWrapper {
             "nodeType": "function",
             "props": Object {
               "children": "Directory",
-              "numeric": true,
             },
             "ref": null,
             "rendered": "Directory",
@@ -4034,11 +4024,11 @@ ShallowWrapper {
 }
 `;
 
-exports[`LibraryTable should render 1`] = `
+exports[`Table should render 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <LibraryTable
+  Symbol(enzyme.__unrendered__): <CustomTable
     contents={
       Array [
         Object {
@@ -4084,7 +4074,7 @@ ShallowWrapper {
       "children": Array [
         <HeaderRow />,
         <ForwardRef(WithStyles)>
-          <LibraryItem
+          <Item
             basename="basename0"
             dirname="dirname0"
             id="id0"
@@ -4098,7 +4088,7 @@ ShallowWrapper {
               }
             }
           />
-          <LibraryItem
+          <Item
             basename="basename1"
             dirname="dirname1"
             id="id1"
@@ -4112,7 +4102,7 @@ ShallowWrapper {
               }
             }
           />
-          <LibraryItem
+          <Item
             basename="basename2"
             dirname="dirname2"
             id="id2"
@@ -4126,7 +4116,7 @@ ShallowWrapper {
               }
             }
           />
-          <LibraryItem
+          <Item
             basename="basename3"
             dirname="dirname3"
             id="id3"
@@ -4162,7 +4152,7 @@ ShallowWrapper {
         "nodeType": "function",
         "props": Object {
           "children": Array [
-            <LibraryItem
+            <Item
               basename="basename0"
               dirname="dirname0"
               id="id0"
@@ -4176,7 +4166,7 @@ ShallowWrapper {
                 }
               }
             />,
-            <LibraryItem
+            <Item
               basename="basename1"
               dirname="dirname1"
               id="id1"
@@ -4190,7 +4180,7 @@ ShallowWrapper {
                 }
               }
             />,
-            <LibraryItem
+            <Item
               basename="basename2"
               dirname="dirname2"
               id="id2"
@@ -4204,7 +4194,7 @@ ShallowWrapper {
                 }
               }
             />,
-            <LibraryItem
+            <Item
               basename="basename3"
               dirname="dirname3"
               id="id3"
@@ -4940,7 +4930,7 @@ ShallowWrapper {
         "children": Array [
           <HeaderRow />,
           <ForwardRef(WithStyles)>
-            <LibraryItem
+            <Item
               basename="basename0"
               dirname="dirname0"
               id="id0"
@@ -4954,7 +4944,7 @@ ShallowWrapper {
                 }
               }
             />
-            <LibraryItem
+            <Item
               basename="basename1"
               dirname="dirname1"
               id="id1"
@@ -4968,7 +4958,7 @@ ShallowWrapper {
                 }
               }
             />
-            <LibraryItem
+            <Item
               basename="basename2"
               dirname="dirname2"
               id="id2"
@@ -4982,7 +4972,7 @@ ShallowWrapper {
                 }
               }
             />
-            <LibraryItem
+            <Item
               basename="basename3"
               dirname="dirname3"
               id="id3"
@@ -5018,7 +5008,7 @@ ShallowWrapper {
           "nodeType": "function",
           "props": Object {
             "children": Array [
-              <LibraryItem
+              <Item
                 basename="basename0"
                 dirname="dirname0"
                 id="id0"
@@ -5032,7 +5022,7 @@ ShallowWrapper {
                   }
                 }
               />,
-              <LibraryItem
+              <Item
                 basename="basename1"
                 dirname="dirname1"
                 id="id1"
@@ -5046,7 +5036,7 @@ ShallowWrapper {
                   }
                 }
               />,
-              <LibraryItem
+              <Item
                 basename="basename2"
                 dirname="dirname2"
                 id="id2"
@@ -5060,7 +5050,7 @@ ShallowWrapper {
                   }
                 }
               />,
-              <LibraryItem
+              <Item
                 basename="basename3"
                 dirname="dirname3"
                 id="id3"

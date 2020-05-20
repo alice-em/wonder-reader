@@ -10,6 +10,7 @@
   "extends": ["airbnb", "plugin:react-hooks/recommended", "prettier"],
   "env": {
     "browser": true,
+    "jest/globals": true,
     "node": true
   },
   "rules": {
@@ -19,6 +20,9 @@
     "consistent-return": "warn",
     "import/no-extraneous-dependencies": "off",
     "import/no-unresolved": "error",
+    "jest/no-disabled-tests": "warn",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
     "jsx-a11y/anchor-is-valid": "off",
     "no-console": "warn",
     "import/no-named-as-default": "off",
@@ -52,10 +56,11 @@
     ]
   },
   "plugins": [
+    "compat",
     "flowtype",
     "import",
+    "jest",
     "promise",
-    "compat",
     "react",
     "react-hooks"
   ],

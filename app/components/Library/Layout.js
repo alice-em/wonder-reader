@@ -4,11 +4,11 @@ import React, { Component } from 'react';
 import electron from 'electron';
 import { FaFolderOpen, FaLevelUpAlt, FaTimes } from 'react-icons/fa';
 
-import LibraryHeader from './LibraryHeader';
-import LibraryTable from './LibraryTable';
+import Header from './Header';
+import Table from './Table';
 
-const { copyDeepObject } = require('../modules/copyData.js');
-const { generateNestedContentFromFilepath } = require('../modules/generate.js');
+const { copyDeepObject } = require('../../modules/copyData.js');
+const { generateNestedContentFromFilepath } = require('../../modules/generate.js');
 
 const { dialog } = electron.remote ? electron.remote : electron;
 
@@ -23,19 +23,19 @@ const styles = {
   },
 };
 
-class LibraryLayout extends Component {
+class Layout extends Component {
   state = {
     contents: [],
     dirname: '',
     fullpath: null,
     id: 'libraryRoot',
     isDirectory: true,
-    root: '',
+    root: this.props.loadedLibrary,
   };
 
   /* istanbul ignore next */
   componentDidMount() {
-    const { root } = this.props;
+    const { root } = this.state;
     if (root) {
       this.updateContent(root);
     }
@@ -77,8 +77,6 @@ class LibraryLayout extends Component {
 
   updateRoot = ([filepath]) => {
     if (filepath) {
-      const { updateRoot } = this.props;
-      updateRoot(filepath);
       this.updateContent(filepath);
     }
   };
@@ -88,7 +86,7 @@ class LibraryLayout extends Component {
 
     return (
       <div className="library" style={styles.libraryStyles}>
-        <LibraryHeader
+        <Header
           position="fixed"
           title="Library"
           onContentClick={this.onClick}
@@ -108,26 +106,25 @@ class LibraryLayout extends Component {
               <FaTimes />
             </IconButton>
           </div>
-        </LibraryHeader>
+        </Header>
         {fullpath && (
           // Library expects only a few props
-          <LibraryTable contents={contents} onContentClick={this.onClick} />
+          <Table contents={contents} onContentClick={this.onClick} />
         )}
       </div>
     );
   }
 }
 
-LibraryLayout.defaultProps = {
-  root: null,
+Layout.defaultProps = {
+  loadedLibrary: null,
 };
 
-LibraryLayout.propTypes = {
+Layout.propTypes = {
   closeLibrary: PropTypes.func.isRequired,
   openComic: PropTypes.func.isRequired,
-  root: PropTypes.string,
+  loadedLibrary: PropTypes.string,
   saveContentDataToParent: PropTypes.func.isRequired,
-  updateRoot: PropTypes.func.isRequired,
 };
 
-export default LibraryLayout;
+export default Layout;

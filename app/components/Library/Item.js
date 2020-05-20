@@ -4,7 +4,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import { FaPercent } from 'react-icons/fa';
 
-import LibraryItemIcon from './LibraryItemIcon';
+import ItemIcon from './ItemIcon';
 // import Bookmark from './Bookmark.js';
 
 const styles = {
@@ -28,7 +28,7 @@ const styles = {
   },
 };
 
-const LibraryItem = ({ basename, dirname, id, isDirectory, onRowClick }) => (
+const Item = ({ basename, dirname, id, isDirectory, onRowClick }) => (
   <TableRow
     className="library-item"
     key={id}
@@ -36,7 +36,7 @@ const LibraryItem = ({ basename, dirname, id, isDirectory, onRowClick }) => (
     style={styles.TableRow}
   >
     <TableCell padding="checkbox" style={styles.wide}>
-      <LibraryItemIcon iconSize={30} isDirectory={isDirectory} />
+      <ItemIcon iconSize={30} isDirectory={isDirectory} />
     </TableCell>
     <TableCell style={styles.three33}>{basename}</TableCell>
     <TableCell style={styles.bbb}>
@@ -48,7 +48,7 @@ const LibraryItem = ({ basename, dirname, id, isDirectory, onRowClick }) => (
   </TableRow>
 );
 
-LibraryItem.propTypes = {
+Item.propTypes = {
   basename: PropTypes.string.isRequired,
   dirname: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
@@ -56,4 +56,4 @@ LibraryItem.propTypes = {
   onRowClick: PropTypes.func.isRequired,
 };
 
-export default LibraryItem;
+export default Item;

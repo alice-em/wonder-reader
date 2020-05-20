@@ -2,8 +2,8 @@ import Adapter from 'enzyme-adapter-react-16';
 import Enzyme, { shallow } from 'enzyme';
 import React from 'react';
 
-import LibraryItem from '../LibraryItem';
-import LibraryTable, { generateLibraryItem, HeaderRow } from '../LibraryTable';
+import Item from '../Item';
+import Table, { generateLibraryItem, HeaderRow } from '../Table';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -16,13 +16,13 @@ const generateContents = i => ({
 
 const contents = [...Array(4).keys()].map(generateContents);
 
-describe('LibraryTable', () => {
+describe('Table', () => {
   it('should render', () => {
     const props = {
       contents,
       onContentClick: jest.fn(),
     };
-    const wrapper = shallow(<LibraryTable {...props} />);
+    const wrapper = shallow(<Table {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -38,7 +38,7 @@ describe('LibraryTable', () => {
       const Wrapper = generateLibraryItem(onContentClick);
       const wrapper = shallow(<Wrapper {...content} />);
       wrapper
-        .find(LibraryItem)
+        .find(Item)
         .props()
         .onRowClick.call();
       expect(onContentClick).toHaveBeenCalledWith(content);

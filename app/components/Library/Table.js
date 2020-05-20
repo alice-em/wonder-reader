@@ -7,7 +7,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { FaPercent } from 'react-icons/fa';
 
-import LibraryItem from './LibraryItem';
+import Item from './Item';
 
 const styles = {
   font: {
@@ -34,7 +34,7 @@ const HeaderRow = () => (
 );
 
 const generateLibraryItem = onContentClick => content => (
-  <LibraryItem
+  <Item
     {...content}
     key={content.id}
     onRowClick={() => {
@@ -44,14 +44,14 @@ const generateLibraryItem = onContentClick => content => (
   />
 );
 
-const LibraryTable = ({ contents, onContentClick }) => (
+const CustomTable = ({ contents, onContentClick }) => (
   <Table className="library-menu" selectable="false">
     <HeaderRow />
     <TableBody>{contents.map(generateLibraryItem(onContentClick))}</TableBody>
   </Table>
 );
 
-LibraryTable.propTypes = {
+CustomTable.propTypes = {
   contents: PropTypes.arrayOf(
     PropTypes.shape({
       basename: PropTypes.string.isRequired,
@@ -63,9 +63,9 @@ LibraryTable.propTypes = {
   onContentClick: PropTypes.func.isRequired,
 };
 
-LibraryTable.defaultProps = {
+CustomTable.defaultProps = {
   contents: [],
 };
 
 export { generateLibraryItem, HeaderRow };
-export default LibraryTable;
+export default CustomTable;

@@ -4,7 +4,7 @@ import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import Context, { ConnectContext } from '../context/ContextFactory';
 
 import Header from './Header';
-import Library from './Library';
+import Library from './Library/Library';
 import Loading from './Loading';
 import PageViewer from './PageViewer';
 import theme from './theme';

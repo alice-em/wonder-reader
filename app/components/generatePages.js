@@ -3,10 +3,8 @@ import React from 'react';
 
 import Page from './Page';
 
-const generateTotalSize = encodedPages => encodedPages.reduce((a, { width }) => a + width, 0);
-
 const generatePages = ({ encodedPages }) => {
-  const totalSize = generateTotalSize(encodedPages);
+  const totalSize = encodedPages.reduce((a, { width }) => a + width, 0);
   return encodedPages.map(({ key, page, width }) => (
     <Page
       key={key}
@@ -32,5 +30,4 @@ generatePages.defaultProps = {
   pages: [],
 };
 
-export { generateTotalSize };
 export default generatePages;

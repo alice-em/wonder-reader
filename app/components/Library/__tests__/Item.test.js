@@ -2,7 +2,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import Enzyme, { shallow } from 'enzyme';
 import React from 'react';
 
-import LibraryItem from '../LibraryItem';
+import Item from '../Item';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -14,9 +14,9 @@ const props = {
   onRowClick: jest.fn(),
 };
 
-describe('LibraryItem', () => {
+describe('Item', () => {
   it('should render', () => {
-    const wrapper = shallow(<LibraryItem {...props} />);
+    const wrapper = shallow(<Item {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

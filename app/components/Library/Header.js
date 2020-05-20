@@ -5,10 +5,10 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 
-import headerStyle from './headerStyle';
-import { buttonStyle, buttonTheme } from './Header/Buttons/buttonStyle';
+import headerStyle from '../headerStyle';
+import { buttonStyle, buttonTheme } from '../Header/Buttons/buttonStyle';
 
-const LibraryHeader = ({ children, position, title }) => (
+const Header = ({ children, position, title }) => (
   <AppBar style={{ position }}>
     <Toolbar>
       <Typography variant="h5" style={headerStyle}>
@@ -21,10 +21,10 @@ const LibraryHeader = ({ children, position, title }) => (
   </AppBar>
 );
 
-LibraryHeader.propTypes = {
+Header.propTypes = {
   children: PropTypes.node.isRequired,
   position: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
 };
 
-export default LibraryHeader;
+export default Header;

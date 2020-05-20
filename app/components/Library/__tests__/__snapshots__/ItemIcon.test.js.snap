@@ -4,7 +4,7 @@ exports[`LibraryItem should render 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <LibraryItemIcon
+  Symbol(enzyme.__unrendered__): <ItemIcon
     iconSize={30}
     isDirectory={true}
   />,
