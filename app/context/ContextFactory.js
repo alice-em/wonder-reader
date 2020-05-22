@@ -70,11 +70,13 @@ const ConnectContext = ({ children }) => {
     return isCenterfold(currentPageIndex) || isCenterfold(currentPageIndex + 1);
   };
 
-  const setCurrentPages = (newPageIndex, pagesToDisplay) => {
-    const { openedComic, pageCount, pages } = state;
+  const setCurrentPages = (newPageIndex, pagesToDisplay, passedState) => {
+    const { openedComic, pageCount, pages } = passedState;
 
     const encodedPages = [];
-    const pagesToRender = Math.min(pageCount, pagesToDisplay);
+    const pagesToRender = Math.min(pageCount || 2, pagesToDisplay);
+    console.log(pagesToRender);
+    console.log(passedState);
     for (let i = 0; i < pagesToRender; i += 1) {
       const key = newPageIndex + i;
       if (key < pages.length) {
@@ -93,12 +95,14 @@ const ConnectContext = ({ children }) => {
         console.log(encodedPages);
       }
     }
+    console.log(encodedPages);
+
     setState({
       currentPageIndex: newPageIndex,
       encodedPages,
       openedComic,
       pageCount,
-      pages,
+      pages: passedState.pages || state.pages,
     });
   };
 
@@ -111,16 +115,16 @@ const ConnectContext = ({ children }) => {
       setState({ pageCount: newPageCount });
       if (newPageCount === 2) {
         if (isCenterfoldsComing()) {
-          setCurrentPages(currentPageIndex, 1);
+          setCurrentPages(currentPageIndex, 1, state);
         }
       }
-      setCurrentPages(currentPageIndex, newPageCount);
+      setCurrentPages(currentPageIndex, newPageCount, state);
     }
   };
 
   // OpenComic Functions
   const openComic = (fullpath) => {
-    const { pageCount } = state;
+    console.log('openComic', {fullpath, ...state})
     const Comic = new File(fullpath);
     setState({ isLoading: true });
     Comic.extract((newOpenedComic) => {
@@ -128,6 +132,7 @@ const ConnectContext = ({ children }) => {
         throwError(true, newOpenedComic.errorMessage);
       } else {
         fs.readdir(newOpenedComic.tempdir, (err, files) => {
+          const { pageCount } = state;
           const generatedPages = files.map(mapPages(newOpenedComic.tempdir));
           const pagePaths = generatedPages.map(({ pagePath }) => pagePath);
 
@@ -138,7 +143,9 @@ const ConnectContext = ({ children }) => {
             isLoading: false,
             openedComic: newOpenedComic,
             pages: generatedPages,
-          };
+          }
+
+          setState(newState);
           setCurrentPages(0, pageCount, newState);
         });
       }
@@ -201,7 +208,7 @@ const ConnectContext = ({ children }) => {
         pages,
         polarity,
       });
-      setCurrentPages(newPageIndex, pagesToDisplay);
+      setCurrentPages(newPageIndex, pagesToDisplay, state);
     }
   };
 
