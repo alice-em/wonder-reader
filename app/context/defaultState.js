@@ -28,7 +28,13 @@ export default {
   // options: false,
 
   // Contents data for Library
-  content: {},
+  content: {
+    contents: [],
+    dirname: '',
+    fullpath: null,
+    id: 'libraryRoot',
+    isDirectory: true,
+  },
 
   // Zoom data for PageViewer
   zoomLevel: 100,

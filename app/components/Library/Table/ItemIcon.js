@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-
 import { FaRegFolderOpen, FaRegFileArchive } from 'react-icons/fa';
 
 const ItemIcon = ({ iconSize, isDirectory }) =>

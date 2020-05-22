@@ -14,17 +14,7 @@ const App = () => (
     <MuiThemeProvider theme={theme}>
       <div className="main">
         <Header />
-        <Context.Consumer>
-          {({ openComic, state, setState, throwError }) => (
-            <Library
-              closeDrawer={() => setState({ top: false })}
-              loadedLibrary={state.content.fullpath}
-              openComic={openComic}
-              throwError={throwError}
-              saveContentDataToMain={content => setState({ content })}
-            />
-          )}
-        </Context.Consumer>
+        <Library />
         <Context.Consumer>
           {({ state }) => (
             <PageViewer

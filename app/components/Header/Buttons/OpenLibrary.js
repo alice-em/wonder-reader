@@ -7,7 +7,7 @@ import Context from '../../../context/ContextFactory';
 const OpenLibrary = () => (
   <Context.Consumer>
     {({ setState }) => (
-      <Button onClick={() => setState({ top: true })}>
+      <Button onClick={() => setState({ isLibraryActive: true })}>
         <FaBook />
       </Button>
     )}

@@ -36,7 +36,7 @@ ShallowWrapper {
           }
           variant="h5"
         >
-          title
+          Library
         </ForwardRef(WithStyles)>
         <ThemeProvider
           theme={
@@ -342,15 +342,11 @@ ShallowWrapper {
               }
             }
           >
-            <div
-              id="buttons"
-            />
+            <ControlBar />
           </div>
         </ThemeProvider>
       </ForwardRef(WithStyles)>,
-      "style": Object {
-        "position": "fixed",
-      },
+      "position": "fixed",
     },
     "ref": null,
     "rendered": Object {
@@ -370,7 +366,7 @@ ShallowWrapper {
             }
             variant="h5"
           >
-            title
+            Library
           </ForwardRef(WithStyles)>,
           <ThemeProvider
             theme={
@@ -676,9 +672,7 @@ ShallowWrapper {
                 }
               }
             >
-              <div
-                id="buttons"
-              />
+              <ControlBar />
             </div>
           </ThemeProvider>,
         ],
@@ -690,7 +684,7 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "children": "title",
+            "children": "Library",
             "style": Object {
               "color": "#fff",
               "cursor": "default",
@@ -700,7 +694,7 @@ ShallowWrapper {
             "variant": "h5",
           },
           "ref": null,
-          "rendered": "title",
+          "rendered": "Library",
           "type": Object {
             "$$typeof": Symbol(react.forward_ref),
             "Naked": Object {
@@ -1036,9 +1030,7 @@ ShallowWrapper {
                 }
               }
             >
-              <div
-                id="buttons"
-              />
+              <ControlBar />
             </div>,
             "theme": Object {
               "breakpoints": Object {
@@ -1337,9 +1329,7 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": <div
-                id="buttons"
-              />,
+              "children": <ControlBar />,
               "style": Object {
                 "margin": "5px 5px 2px 2px",
                 "position": "absolute",
@@ -1351,13 +1341,11 @@ ShallowWrapper {
             "rendered": Object {
               "instance": null,
               "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "id": "buttons",
-              },
+              "nodeType": "function",
+              "props": Object {},
               "ref": null,
               "rendered": null,
-              "type": "div",
+              "type": [Function],
             },
             "type": "div",
           },
@@ -2009,7 +1997,7 @@ ShallowWrapper {
             }
             variant="h5"
           >
-            title
+            Library
           </ForwardRef(WithStyles)>
           <ThemeProvider
             theme={
@@ -2315,15 +2303,11 @@ ShallowWrapper {
                 }
               }
             >
-              <div
-                id="buttons"
-              />
+              <ControlBar />
             </div>
           </ThemeProvider>
         </ForwardRef(WithStyles)>,
-        "style": Object {
-          "position": "fixed",
-        },
+        "position": "fixed",
       },
       "ref": null,
       "rendered": Object {
@@ -2343,7 +2327,7 @@ ShallowWrapper {
               }
               variant="h5"
             >
-              title
+              Library
             </ForwardRef(WithStyles)>,
             <ThemeProvider
               theme={
@@ -2649,9 +2633,7 @@ ShallowWrapper {
                   }
                 }
               >
-                <div
-                  id="buttons"
-                />
+                <ControlBar />
               </div>
             </ThemeProvider>,
           ],
@@ -2663,7 +2645,7 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "function",
             "props": Object {
-              "children": "title",
+              "children": "Library",
               "style": Object {
                 "color": "#fff",
                 "cursor": "default",
@@ -2673,7 +2655,7 @@ ShallowWrapper {
               "variant": "h5",
             },
             "ref": null,
-            "rendered": "title",
+            "rendered": "Library",
             "type": Object {
               "$$typeof": Symbol(react.forward_ref),
               "Naked": Object {
@@ -3009,9 +2991,7 @@ ShallowWrapper {
                   }
                 }
               >
-                <div
-                  id="buttons"
-                />
+                <ControlBar />
               </div>,
               "theme": Object {
                 "breakpoints": Object {
@@ -3310,9 +3290,7 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "host",
               "props": Object {
-                "children": <div
-                  id="buttons"
-                />,
+                "children": <ControlBar />,
                 "style": Object {
                   "margin": "5px 5px 2px 2px",
                   "position": "absolute",
@@ -3324,13 +3302,11 @@ ShallowWrapper {
               "rendered": Object {
                 "instance": null,
                 "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "id": "buttons",
-                },
+                "nodeType": "function",
+                "props": Object {},
                 "ref": null,
                 "rendered": null,
-                "type": "div",
+                "type": [Function],
               },
               "type": "div",
             },

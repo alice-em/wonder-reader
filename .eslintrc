@@ -53,7 +53,8 @@
           "render"
         ]
       }
-    ]
+    ],
+    "react/style-prop-object": "off"
   },
   "plugins": [
     "compat",

@@ -3,7 +3,7 @@ import Enzyme, { shallow } from 'enzyme';
 import React from 'react';
 import { FaRegFolderOpen, FaRegFileArchive } from 'react-icons/fa';
 
-import ItemIcon from '../ItemIcon';
+import ItemIcon from '../Table/ItemIcon';
 
 Enzyme.configure({ adapter: new Adapter() });
 

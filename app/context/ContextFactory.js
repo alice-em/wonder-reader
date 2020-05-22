@@ -1,14 +1,20 @@
+import electron from 'electron';
 import fs from 'fs';
 import React, { createContext, useEffect, useState } from 'react';
 import path from 'path';
 import sizeOf from 'image-size';
 
+import defaultState from './defaultState';
 import encodePath from '../modules/encodePath';
 import File from '../modules/File';
-import { generateCenterfolds } from '../modules/generate';
+import { copyDeepObject } from '../modules/copyData';
+import {
+  generateCenterfolds,
+  generateNestedContentFromFilepath,
+} from '../modules/generate';
 import { strainComics } from '../modules/strain';
 
-import defaultState from './defaultState';
+const { dialog } = electron.remote ? electron.remote : electron;
 
 const mapPages = tempdir => (file, key) => {
   const pagePath = path.join(tempdir, file);
@@ -38,15 +44,13 @@ const ConnectContext = ({ children }) => {
   const [state, updateState] = useState(defaultState);
 
   // const setState = newState => updateState({ ...state, ...newState });
-  const setState = newState => updateState(currentState => ({ ...currentState, ...newState }));
+  const setState = newState =>
+    updateState((currentState) => {
+      console.log('currentState', currentState);
+      console.log('newState', newState);
 
-  // const {
-  //   centerfolds,
-  //   currentPageIndex,
-  //   openedComic,
-  //   pageCount,
-  //   pages,
-  // } = state;
+      return { ...currentState, ...newState };
+    });
 
   // Core Shared Functionality
   const throwError = (error, errorMessage) => {
@@ -114,7 +118,7 @@ const ConnectContext = ({ children }) => {
     }
   };
 
-  // openAdjacentComic Functions
+  // OpenComic Functions
   const openComic = (fullpath) => {
     const { pageCount } = state;
     const Comic = new File(fullpath);
@@ -129,11 +133,11 @@ const ConnectContext = ({ children }) => {
 
           const newState = {
             centerfolds: generateCenterfolds(pagePaths),
-            openedComic: newOpenedComic,
             images: generateImages(generatedPages),
+            isLibraryActive: false,
             isLoading: false,
+            openedComic: newOpenedComic,
             pages: generatedPages,
-            top: false,
           };
           setCurrentPages(0, pageCount, newState);
         });
@@ -149,7 +153,6 @@ const ConnectContext = ({ children }) => {
         const strainedComics = strainComics(files);
         const newIndex = strainedComics.indexOf(openedComic.name) + polarity;
         if (newIndex > -1 && newIndex < strainedComics.length) {
-
           const newComicFilepath = path.join(
             path.dirname(openedComic.origin),
             strainedComics[newIndex],
@@ -229,6 +232,42 @@ const ConnectContext = ({ children }) => {
     }
   };
 
+  // Library Functions
+  const setContentToState = (content) => {
+    const newContent = copyDeepObject(content);
+    newContent.id = 'libraryRoot';
+    setState({ content: newContent });
+  };
+
+  const updateContent = filepath =>
+    generateNestedContentFromFilepath(filepath, setContentToState);
+
+  const updateRoot = ([filepath]) => {
+    if (filepath) {
+      updateContent(filepath);
+    }
+  };
+
+  const openDirectory = () => {
+    const properties = ['openDirectory'];
+    dialog.showOpenDialog({ properties }, updateRoot);
+  };
+
+  const setParentAsLibrary = () => {
+    const {
+      content: { dirname },
+    } = state;
+    updateContent(dirname || '');
+  };
+
+  const onContentClick = ({ fullpath, isDirectory }) => {
+    if (isDirectory) {
+      updateContent(fullpath);
+    } else {
+      openComic(fullpath);
+    }
+  };
+
   useEffect(() => {
     window.addEventListener(
       'keydown',
@@ -252,10 +291,13 @@ const ConnectContext = ({ children }) => {
     <Context.Provider
       value={{
         changePageCount,
+        onContentClick,
         openAdjacentComic,
         openComic,
-        state,
+        openDirectory,
+        setParentAsLibrary,
         setState,
+        state,
         throwError,
         turnPageLeft,
         turnPageRight,
