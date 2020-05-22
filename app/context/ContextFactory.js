@@ -93,7 +93,7 @@ const ConnectContext = ({ children }) => {
       currentPageIndex: newPageIndex,
       encodedPages,
       openedComic,
-      pageCount,
+      pageCount: pageCount || state.pageCount,
       pages: passedState.pages || state.pages,
     });
   };
