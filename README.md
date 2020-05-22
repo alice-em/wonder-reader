@@ -85,6 +85,15 @@ $ npm run build
 $ npm run test-e2e
 ```
 
+To run Unit Test
+
+```bash
+$ cd app
+$ npm rebuild @fknop/node-unrar --update-binary
+$ cd ..
+$ npm run test
+```
+
 :bulb: You can debug your production build with devtools by simply setting the `DEBUG_PROD` env variable:
 ```bash
 DEBUG_PROD=true npm run package
