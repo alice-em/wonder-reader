@@ -7,6 +7,7 @@ import sizeOf from 'image-size';
 import defaultState from './defaultState';
 import encodePath from '../modules/encodePath';
 import File from '../modules/File';
+import turnPage from '../modules/turnPage';
 import { copyDeepObject } from '../modules/copyData';
 import {
   generateCenterfolds,
@@ -18,11 +19,6 @@ const { dialog } = electron.remote ? electron.remote : electron;
 
 const mapPages = tempdir => (file, key) => {
   const pagePath = path.join(tempdir, file);
-  console.log('pagePath', {
-    tempdir,
-    file,
-    key,
-  });
   return {
     encodedPagePath: encodePath(pagePath),
     key,
@@ -43,19 +39,19 @@ Context.displayName = 'Context';
 const ConnectContext = ({ children }) => {
   const [state, updateState] = useState(defaultState);
 
-  // const setState = newState => updateState({ ...state, ...newState });
   const setState = newState =>
-    updateState((currentState) => {
-      console.log('currentState', currentState);
-      console.log('newState', newState);
-
-      return { ...currentState, ...newState };
-    });
+    updateState(currentState => ({ ...currentState, ...newState }));
+  // const setState = newState =>
+  //   updateState(currentState => {
+  //     console.log('currentState', currentState);
+  //     console.log('newState', newState);
+  //
+  //     return { ...currentState, ...newState };
+  //   });
 
   // Core Shared Functionality
   const throwError = (error, errorMessage) => {
     if (error) {
-      // console.log(errorMessage);
       setState({ errorMessage });
     }
   };
@@ -74,9 +70,7 @@ const ConnectContext = ({ children }) => {
     const { openedComic, pageCount, pages } = passedState;
 
     const encodedPages = [];
-    const pagesToRender = Math.min(pageCount || 2, pagesToDisplay);
-    console.log(pagesToRender);
-    console.log(passedState);
+    const pagesToRender = Math.min(pageCount || state.pageCount, pagesToDisplay);
     for (let i = 0; i < pagesToRender; i += 1) {
       const key = newPageIndex + i;
       if (key < pages.length) {
@@ -92,10 +86,8 @@ const ConnectContext = ({ children }) => {
           width: width * ratio,
           height: height * ratio,
         };
-        console.log(encodedPages);
       }
     }
-    console.log(encodedPages);
 
     setState({
       currentPageIndex: newPageIndex,
@@ -124,7 +116,6 @@ const ConnectContext = ({ children }) => {
 
   // OpenComic Functions
   const openComic = (fullpath) => {
-    console.log('openComic', {fullpath, ...state})
     const Comic = new File(fullpath);
     setState({ isLoading: true });
     Comic.extract((newOpenedComic) => {
@@ -143,7 +134,7 @@ const ConnectContext = ({ children }) => {
             isLoading: false,
             openedComic: newOpenedComic,
             pages: generatedPages,
-          }
+          };
 
           setState(newState);
           setCurrentPages(0, pageCount, newState);
@@ -192,7 +183,7 @@ const ConnectContext = ({ children }) => {
     );
   };
 
-  const turnPage = (polarity) => {
+  const handleTurnPage = (polarity) => {
     const {
       centerfolds,
       currentPageIndex,
@@ -215,14 +206,14 @@ const ConnectContext = ({ children }) => {
   const turnPageLeft = () => {
     const polarity = -1;
     if (shouldPageTurnLeft()) {
-      turnPage(polarity);
+      handleTurnPage(polarity);
     }
   };
 
   const turnPageRight = () => {
     const polarity = 1;
     if (shouldPageTurnRight()) {
-      turnPage(polarity);
+      handleTurnPage(polarity);
     }
   };
 
