@@ -10,11 +10,6 @@ ShallowWrapper {
         "list": "classes.list",
       }
     }
-    closeDrawer={[MockFunction]}
-    loadedLibrary="./"
-    open={true}
-    openComic={[MockFunction]}
-    saveContentDataToMain={[MockFunction]}
     style={Object {}}
   />,
   Symbol(enzyme.__renderer__): Object {

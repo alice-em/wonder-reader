@@ -6,22 +6,9 @@ import Table from '../Table/Table';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-const generateContents = i => ({
-  basename: `basename${i}`,
-  dirname: `dirname${i}`,
-  id: `id${i}`,
-  isDirectory: i % 2 === 0,
-});
-
-const contents = [...Array(4).keys()].map(generateContents);
-
 describe('Table', () => {
   it('should render', () => {
-    const props = {
-      contents,
-      onContentClick: jest.fn(),
-    };
-    const wrapper = shallow(<Table {...props} />);
+    const wrapper = shallow(<Table />);
     expect(wrapper).toMatchSnapshot();
   });
 });

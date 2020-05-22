@@ -4,37 +4,7 @@ exports[`Table should render 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <CustomTable
-    contents={
-      Array [
-        Object {
-          "basename": "basename0",
-          "dirname": "dirname0",
-          "id": "id0",
-          "isDirectory": true,
-        },
-        Object {
-          "basename": "basename1",
-          "dirname": "dirname1",
-          "id": "id1",
-          "isDirectory": false,
-        },
-        Object {
-          "basename": "basename2",
-          "dirname": "dirname2",
-          "id": "id2",
-          "isDirectory": true,
-        },
-        Object {
-          "basename": "basename3",
-          "dirname": "dirname3",
-          "id": "id3",
-          "isDirectory": false,
-        },
-      ]
-    }
-    onContentClick={[MockFunction]}
-  />,
+  Symbol(enzyme.__unrendered__): <CustomTable />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
