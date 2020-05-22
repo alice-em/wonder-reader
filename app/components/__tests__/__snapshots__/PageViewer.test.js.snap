@@ -5,7 +5,7 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <PageViewer
-    pages={Array []}
+    encodedPages={Array []}
     zoomLevel={100}
   />,
   Symbol(enzyme.__renderer__): Object {

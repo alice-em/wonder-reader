@@ -85,7 +85,7 @@ describe('generate', () => {
       const content = generateContent(sampleFilepath);
       generateContents(content, (err, contents) => {
         expect(err).toBe(null);
-        expect(contents).toEqual({});
+        expect(contents).toEqual([]);
         done();
       });
     });
@@ -95,7 +95,7 @@ describe('generate', () => {
       content.isDirectory = true;
       generateContents(content, (err, contents) => {
         expect(err).toBe(null);
-        expect(contents).toEqual({});
+        expect(contents).toEqual([]);
         done();
       });
     });

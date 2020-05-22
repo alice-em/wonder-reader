@@ -1,17 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Loading should render 1`] = `
+exports[`Library should render 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <Loading
+  Symbol(enzyme.__unrendered__): <Library
     classes={
       Object {
-        "progress": "sampleProgress",
-        "root": "sampleRoot",
+        "list": "classes.list",
       }
     }
-    isLoading={true}
+    style={Object {}}
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],

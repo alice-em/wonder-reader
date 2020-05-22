@@ -133,8 +133,7 @@ class File {
 
   updatePages(cb) {
     fs.readdir(this.tempdir, (err, files) => {
-      const strainedFiles = strainImages(files);
-      this.pages = strainedFiles;
+      this.pages = strainImages(files);
       cb(this);
     });
   }

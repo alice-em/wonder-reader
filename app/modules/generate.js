@@ -5,6 +5,8 @@ const fs = require('fs');
 const path = require('path');
 const sizeOf = require('image-size');
 
+const joinPathWithContent = content => file => path.join(content.fullpath, file);
+
 // function variables
 // const sortNumber = (a, b) => a - b;
 const filterByWiderImages = (page) => {
@@ -41,15 +43,15 @@ const generateContents = (content, cb) => {
     fs.readdir(content.fullpath, (err, files) => {
       if (!err) {
         const contents = strainComics(files)
-          .map(file => path.join(content.fullpath, file))
-          .map(file => generateContent(file));
+          .map(joinPathWithContent(content))
+          .map(generateContent);
         cb(err, contents);
       } else {
-        cb(null, {});
+        cb(null, []);
       }
     });
   } else {
-    cb(null, {});
+    cb(null, []);
   }
 };
 

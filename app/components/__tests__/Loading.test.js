@@ -2,7 +2,9 @@ import Adapter from 'enzyme-adapter-react-16';
 import Enzyme, { shallow } from 'enzyme';
 import React from 'react';
 
-import { Loading, PaperElement } from '../Loading';
+import { Loading } from '../Loading';
+
+jest.requireActual('react');
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -16,11 +18,6 @@ describe('Loading', () => {
   };
   it('should render', () => {
     const wrapper = shallow(<Loading {...props} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should render PaperElement', () => {
-    const wrapper = shallow(<PaperElement {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

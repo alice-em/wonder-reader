@@ -1,18 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Loading should render 1`] = `
+exports[`Table should render 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <Loading
-    classes={
-      Object {
-        "progress": "sampleProgress",
-        "root": "sampleRoot",
-      }
-    }
-    isLoading={true}
-  />,
+  Symbol(enzyme.__unrendered__): <CustomTable />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],

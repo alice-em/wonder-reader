@@ -13,16 +13,16 @@ class PageViewer extends Component {
   };
 
   componentDidUpdate() {
-    const { pages } = this.props;
+    const { encodedPages } = this.props;
     const { currentComicPage } = this.state;
     const pageViewer = document.querySelector('.PageViewer');
     // const pageWrapper = document.getElementById('pageWrapper');
 
-    if (pages.length > 0) {
-      if (currentComicPage !== pages[0].page) {
+    if (encodedPages.length > 0) {
+      if (currentComicPage !== encodedPages[0].page) {
         pageViewer.scrollLeft = 0;
         pageViewer.scrollTop = 0;
-        this.setState({ currentComicPage: pages[0].page }); // eslint-disable-line
+        this.setState({ currentComicPage: encodedPages[0].page }); // eslint-disable-line
         // } else if (P.zoomLevel >= 100 && S.currentZoomLevel !== P.zoomLevel) {
         //   // Center Points X || Y
         //   const cPX = pageViewer.scrollLeft + pageViewer.clientWidth / 2;
@@ -56,7 +56,8 @@ class PageViewer extends Component {
 
   render() {
     // console.log('PageViewer:', this.props);
-    const { pages, zoomLevel } = this.props;
+    const { encodedPages, zoomLevel } = this.props;
+    console.log('encodedPages', encodedPages);
 
     return (
       <ScrollContainer className="PageViewer dragscroll" hideScrollbars={false}>
@@ -69,7 +70,7 @@ class PageViewer extends Component {
             width: `${zoomLevel}%`,
           }}
         >
-          {generatePages({ pages })}
+          {generatePages({ encodedPages })}
         </div>
       </ScrollContainer>
     );
@@ -77,7 +78,7 @@ class PageViewer extends Component {
 }
 
 PageViewer.propTypes = {
-  pages: PropTypes.arrayOf(
+  encodedPages: PropTypes.arrayOf(
     PropTypes.shape({
       key: PropTypes.any,
       page: PropTypes.string,
@@ -88,7 +89,7 @@ PageViewer.propTypes = {
 };
 
 PageViewer.defaultProps = {
-  pages: [],
+  encodedPages: [],
 };
 
 export default PageViewer;

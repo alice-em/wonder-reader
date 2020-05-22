@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LibraryItem should render 1`] = `
+exports[`Item should render 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <LibraryItem
+  Symbol(enzyme.__unrendered__): <Item
     basename="basename"
     dirname="dirname"
     id="id"
@@ -25,7 +25,6 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <ForwardRef(WithStyles)
-          numeric={true}
           padding="checkbox"
           style={
             Object {
@@ -33,7 +32,7 @@ ShallowWrapper {
             }
           }
         >
-          <LibraryItemIcon
+          <ItemIcon
             iconSize={30}
             isDirectory={true}
           />
@@ -48,7 +47,6 @@ ShallowWrapper {
           basename
         </ForwardRef(WithStyles)>,
         <ForwardRef(WithStyles)
-          numeric={true}
           style={
             Object {
               "color": "#bbb",
@@ -90,11 +88,10 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "children": <LibraryItemIcon
+          "children": <ItemIcon
             iconSize={30}
             isDirectory={true}
           />,
-          "numeric": true,
           "padding": "checkbox",
           "style": Object {
             "width": "10px",
@@ -767,7 +764,6 @@ ShallowWrapper {
         "nodeType": "function",
         "props": Object {
           "children": "dirname",
-          "numeric": true,
           "style": Object {
             "color": "#bbb",
           },
@@ -1766,7 +1762,6 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <ForwardRef(WithStyles)
-            numeric={true}
             padding="checkbox"
             style={
               Object {
@@ -1774,7 +1769,7 @@ ShallowWrapper {
               }
             }
           >
-            <LibraryItemIcon
+            <ItemIcon
               iconSize={30}
               isDirectory={true}
             />
@@ -1789,7 +1784,6 @@ ShallowWrapper {
             basename
           </ForwardRef(WithStyles)>,
           <ForwardRef(WithStyles)
-            numeric={true}
             style={
               Object {
                 "color": "#bbb",
@@ -1831,11 +1825,10 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "children": <LibraryItemIcon
+            "children": <ItemIcon
               iconSize={30}
               isDirectory={true}
             />,
-            "numeric": true,
             "padding": "checkbox",
             "style": Object {
               "width": "10px",
@@ -2508,7 +2501,6 @@ ShallowWrapper {
           "nodeType": "function",
           "props": Object {
             "children": "dirname",
-            "numeric": true,
             "style": Object {
               "color": "#bbb",
             },
