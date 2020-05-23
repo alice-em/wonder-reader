@@ -1,5 +1,5 @@
 import AppBar from '@material-ui/core/AppBar';
-import React, { memo } from 'react';
+import React from 'react';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
@@ -24,4 +24,4 @@ const Header = () => (
 );
 
 export { Header };
-export default memo(Header);
+export default Header;
