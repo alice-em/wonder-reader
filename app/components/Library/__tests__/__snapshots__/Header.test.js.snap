@@ -335,7 +335,7 @@ ShallowWrapper {
               }
             }
           >
-            <UNDEFINED />
+            <ControlBar />
           </div>
         </ThemeProvider>
       </ForwardRef(WithStyles)>,
@@ -665,7 +665,7 @@ ShallowWrapper {
                 }
               }
             >
-              <UNDEFINED />
+              <ControlBar />
             </div>
           </ThemeProvider>,
         ],
@@ -1023,7 +1023,7 @@ ShallowWrapper {
                 }
               }
             >
-              <UNDEFINED />
+              <ControlBar />
             </div>,
             "theme": Object {
               "breakpoints": Object {
@@ -1322,7 +1322,7 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": <UNDEFINED />,
+              "children": <ControlBar />,
               "style": Object {
                 "margin": "5px 5px 2px 2px",
                 "position": "absolute",
@@ -1338,11 +1338,7 @@ ShallowWrapper {
               "props": Object {},
               "ref": null,
               "rendered": null,
-              "type": Object {
-                "$$typeof": Symbol(react.memo),
-                "compare": null,
-                "type": [Function],
-              },
+              "type": [Function],
             },
             "type": "div",
           },
@@ -2300,7 +2296,7 @@ ShallowWrapper {
                 }
               }
             >
-              <UNDEFINED />
+              <ControlBar />
             </div>
           </ThemeProvider>
         </ForwardRef(WithStyles)>,
@@ -2630,7 +2626,7 @@ ShallowWrapper {
                   }
                 }
               >
-                <UNDEFINED />
+                <ControlBar />
               </div>
             </ThemeProvider>,
           ],
@@ -2988,7 +2984,7 @@ ShallowWrapper {
                   }
                 }
               >
-                <UNDEFINED />
+                <ControlBar />
               </div>,
               "theme": Object {
                 "breakpoints": Object {
@@ -3287,7 +3283,7 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "host",
               "props": Object {
-                "children": <UNDEFINED />,
+                "children": <ControlBar />,
                 "style": Object {
                   "margin": "5px 5px 2px 2px",
                   "position": "absolute",
@@ -3303,11 +3299,7 @@ ShallowWrapper {
                 "props": Object {},
                 "ref": null,
                 "rendered": null,
-                "type": Object {
-                  "$$typeof": Symbol(react.memo),
-                  "compare": null,
-                  "type": [Function],
-                },
+                "type": [Function],
               },
               "type": "div",
             },

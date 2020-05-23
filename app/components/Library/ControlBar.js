@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 
 import * as Buttons from './Buttons';
 
@@ -10,4 +10,4 @@ const ControlBar = () => (
   </div>
 );
 
-export default memo(ControlBar);
+export default ControlBar;
