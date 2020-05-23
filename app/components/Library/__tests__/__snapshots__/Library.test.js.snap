@@ -24,32 +24,13 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "function",
     "props": Object {
-      "children": [Function],
+      "children": <Context.Consumer>
+        [Function]
+      </Context.Consumer>,
+      "style": Object {},
     },
     "ref": null,
-    "rendered": [Function],
-    "type": Object {
-      "$$typeof": Symbol(react.context),
-      "_calculateChangedBits": null,
-      "_context": Object {
-        "$$typeof": Symbol(react.context),
-        "Consumer": [Circular],
-        "Provider": Object {
-          "$$typeof": Symbol(react.provider),
-          "_context": [Circular],
-        },
-        "_calculateChangedBits": null,
-        "_currentRenderer": null,
-        "_currentRenderer2": null,
-        "_currentValue": undefined,
-        "_currentValue2": undefined,
-        "_threadCount": 0,
-        "displayName": "Context",
-      },
-    },
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
+    "rendered": Object {
       "instance": null,
       "key": undefined,
       "nodeType": "function",
@@ -76,6 +57,59 @@ ShallowWrapper {
           "_threadCount": 0,
           "displayName": "Context",
         },
+      },
+    },
+    "type": Object {
+      "$$typeof": Symbol(react.memo),
+      "compare": null,
+      "type": [Function],
+    },
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": <Context.Consumer>
+          [Function]
+        </Context.Consumer>,
+        "style": Object {},
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": [Function],
+        },
+        "ref": null,
+        "rendered": [Function],
+        "type": Object {
+          "$$typeof": Symbol(react.context),
+          "_calculateChangedBits": null,
+          "_context": Object {
+            "$$typeof": Symbol(react.context),
+            "Consumer": [Circular],
+            "Provider": Object {
+              "$$typeof": Symbol(react.provider),
+              "_context": [Circular],
+            },
+            "_calculateChangedBits": null,
+            "_currentRenderer": null,
+            "_currentRenderer2": null,
+            "_currentValue": undefined,
+            "_currentValue2": undefined,
+            "_threadCount": 0,
+            "displayName": "Context",
+          },
+        },
+      },
+      "type": Object {
+        "$$typeof": Symbol(react.memo),
+        "compare": null,
+        "type": [Function],
       },
     },
   ],

@@ -39,8 +39,9 @@ Context.displayName = 'Context';
 const ConnectContext = ({ children }) => {
   const [state, updateState] = useState(defaultState);
 
-  const setState = newState =>
-    updateState(currentState => ({ ...currentState, ...newState }));
+  // prettier-ignore
+  const setState = newState => updateState(currentState => ({ ...currentState, ...newState }));
+  // // prettier-ignore
   // const setState = newState =>
   //   updateState(currentState => {
   //     console.log('currentState', currentState);
@@ -66,25 +67,33 @@ const ConnectContext = ({ children }) => {
     return isCenterfold(currentPageIndex) || isCenterfold(currentPageIndex + 1);
   };
 
-  const setCurrentPages = (newPageIndex, pagesToDisplay, passedState) => {
-    const { openedComic, pageCount, pages } = passedState;
-
+  const setCurrentPages = (
+    newPageIndex,
+    pagesToDisplay,
+    { openedComic, pageCount, pages } = state,
+  ) => {
     const encodedPages = [];
-    const pagesToRender = Math.min(pageCount || state.pageCount, pagesToDisplay);
+    const pagesToRender = Math.min(
+      pageCount || state.pageCount,
+      pagesToDisplay,
+    );
     for (let i = 0; i < pagesToRender; i += 1) {
-      const key = newPageIndex + i;
+      const key = Number(newPageIndex) + i;
       if (key < pages.length) {
         // Stops from trying to read beyond comic page length
         const pagePath = path.join(openedComic.tempdir, openedComic.pages[key]);
         const { width, height } = sizeOf(pagePath);
-        const ratio =
-          key === newPageIndex ? 1 : encodedPages[0].height / height;
+        const generateHeight = () =>
+          encodedPages[0] && encodedPages[0].height
+            ? encodedPages[0].height / height
+            : 1;
+        const ratio = key === newPageIndex ? 1 : generateHeight();
 
         encodedPages[i] = {
-          page: encodePath(pagePath),
-          key,
-          width: width * ratio,
           height: height * ratio,
+          key,
+          page: encodePath(pagePath),
+          width: width * ratio,
         };
       }
     }
@@ -94,7 +103,7 @@ const ConnectContext = ({ children }) => {
       encodedPages,
       openedComic,
       pageCount: pageCount || state.pageCount,
-      pages: passedState.pages || state.pages,
+      pages: pages || state.pages,
     });
   };
 
@@ -184,6 +193,10 @@ const ConnectContext = ({ children }) => {
   };
 
   const handleTurnPage = (polarity) => {
+    const pageViewerElement = document.querySelector('.PageViewer');
+
+    pageViewerElement.scrollLeft = 0;
+    pageViewerElement.scrollTop = 0;
     const {
       centerfolds,
       currentPageIndex,
@@ -266,23 +279,23 @@ const ConnectContext = ({ children }) => {
     }
   };
 
+  const keyListener = (e) => {
+    const { openedComic } = state;
+    const isComicActive = openedComic.name !== null;
+    const isActiveElemInput = document.activeElement.tagName === 'input';
+
+    const shouldTurn = isComicActive && !isActiveElemInput;
+
+    if (shouldTurn) {
+      arrowKeyTurnPage(e.code);
+    }
+  };
+
   useEffect(() => {
-    window.addEventListener(
-      'keydown',
-      (e) => {
-        const { openedComic } = state;
-        const isComicActive = openedComic.name !== null;
-        const isActiveElemInput = document.activeElement.tagName === 'input';
+    window.addEventListener('keydown', keyListener);
 
-        const shouldTurn = isComicActive && !isActiveElemInput;
-
-        if (shouldTurn) {
-          arrowKeyTurnPage(e.code);
-        }
-      },
-      [],
-    );
-  });
+    return () => window.removeEventListener('keydown', keyListener);
+  }, [state.encodedPages]);
 
   // Component Render
   return (

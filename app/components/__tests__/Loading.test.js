@@ -4,7 +4,7 @@ import React from 'react';
 
 import { Loading } from '../Loading';
 
-jest.requireActual('react');
+jest.mock('../../modules/File')
 
 Enzyme.configure({ adapter: new Adapter() });
 

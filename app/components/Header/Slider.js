@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, memo, useEffect } from 'react';
 
 import Context from '../../context/ContextFactory';
-import SliderInput from '../SliderInput';
+import SliderInput from './SliderInput';
 
 const boxShadow = [
   'inset rgb(135, 169, 214) 0px 3px 0px',
@@ -48,25 +48,23 @@ const Slider = () => {
         sliderComponent.removeEventListener('mouseleave', blurSliderInput);
       }
     };
-  });
+  }, []);
 
   return (
-    <Context.Consumer>
-      {({ state, setState }) => (
-        <div className="slider" id="sliderComponent" style={styles.Slider}>
-          <SliderInput
-            onChange={({ target: { value: eventValue } }) => {
-              setState({ zoomLevel: Number(eventValue) });
-            }}
-            value={state.zoomLevel}
-          />
-          <div className="zoomLevel" style={styles.zoomLevel}>
-            {state.zoomLevel}
-          </div>
-        </div>
-      )}
-    </Context.Consumer>
+    <div className="slider" id="sliderComponent" style={styles.Slider}>
+      <Context.Consumer>
+        {({ state: { zoomLevel } }) => (
+          <Fragment>
+            <SliderInput value={zoomLevel} />
+            <div className="zoomLevel" style={styles.zoomLevel}>
+              {zoomLevel}
+            </div>
+          </Fragment>
+        )}
+      </Context.Consumer>
+    </div>
   );
 };
 
-export default Slider;
+export { Slider };
+export default memo(Slider);

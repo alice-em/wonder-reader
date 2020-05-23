@@ -4,6 +4,8 @@ import React from 'react';
 
 import Table from '../Table/Table';
 
+jest.mock('../../../modules/File');
+
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('Table', () => {

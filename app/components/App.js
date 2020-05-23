@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 
-import Context, { ConnectContext } from '../context/ContextFactory';
+import { ConnectContext } from '../context/ContextFactory';
 
 import Header from './Header';
 import Library from './Library/Library';
 import Loading from './Loading';
-import PageViewer from './PageViewer';
+import PageViewer from './Page/Viewer';
 import theme from './theme';
 
 const App = () => (
@@ -15,19 +15,11 @@ const App = () => (
       <div className="main">
         <Header />
         <Library />
-        <Context.Consumer>
-          {({ state }) => (
-            <PageViewer
-              encodedPages={state.encodedPages}
-              zoomLevel={state.zoomLevel}
-            />
-          )}
-        </Context.Consumer>
-
+        <PageViewer />
         <Loading />
       </div>
     </MuiThemeProvider>
   </ConnectContext>
 );
 
-export default App;
+export default memo(App);

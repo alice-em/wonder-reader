@@ -18,7 +18,7 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": Array [
-        <Header />,
+        <UNDEFINED />,
         <CustomTable />,
       ],
       "className": "library",
@@ -37,7 +37,11 @@ ShallowWrapper {
         "props": Object {},
         "ref": null,
         "rendered": null,
-        "type": [Function],
+        "type": Object {
+          "$$typeof": Symbol(react.memo),
+          "compare": null,
+          "type": [Function],
+        },
       },
       Object {
         "instance": null,
@@ -58,7 +62,7 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": Array [
-          <Header />,
+          <UNDEFINED />,
           <CustomTable />,
         ],
         "className": "library",
@@ -77,7 +81,11 @@ ShallowWrapper {
           "props": Object {},
           "ref": null,
           "rendered": null,
-          "type": [Function],
+          "type": Object {
+            "$$typeof": Symbol(react.memo),
+            "compare": null,
+            "type": [Function],
+          },
         },
         Object {
           "instance": null,

@@ -1,5 +1,5 @@
 import IconButton from '@material-ui/core/IconButton';
-import React from 'react';
+import React, { memo } from 'react';
 import { FaLevelUpAlt } from 'react-icons/fa';
 
 import Context from '../../../context/ContextFactory';
@@ -14,4 +14,4 @@ const SetParentAsLibrary = () => (
   </Context.Consumer>
 );
 
-export default SetParentAsLibrary;
+export default memo(SetParentAsLibrary);

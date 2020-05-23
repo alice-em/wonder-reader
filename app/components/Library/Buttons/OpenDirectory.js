@@ -1,5 +1,5 @@
 import IconButton from '@material-ui/core/IconButton';
-import React from 'react';
+import React, { memo } from 'react';
 import { FaFolderOpen } from 'react-icons/fa';
 
 import Context from '../../../context/ContextFactory';
@@ -14,4 +14,4 @@ const OpenDirectory = () => (
   </Context.Consumer>
 );
 
-export default OpenDirectory;
+export default memo(OpenDirectory);

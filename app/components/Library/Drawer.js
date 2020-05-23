@@ -1,6 +1,6 @@
 import Drawer from '@material-ui/core/Drawer';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { memo } from 'react';
 
 import Context from '../../context/ContextFactory';
 
@@ -14,11 +14,11 @@ const styles = {
 
 const CustomDrawer = ({ children, style }) => (
   <Context.Consumer>
-    {({ setState, state }) => (
+    {({ setState, state: { isLibraryActive } }) => (
       <div className="Library" style={style}>
         <Drawer
           anchor="top"
-          open={state.isLibraryActive}
+          open={isLibraryActive}
           onClose={() => setState({ isLibraryActive: false })}
           PaperProps={{ style: styles.PaperProps }}
           variant="temporary"
@@ -40,4 +40,4 @@ CustomDrawer.propTypes = {
   style: PropTypes.objectOf(PropTypes.object.isRequired),
 };
 
-export default CustomDrawer;
+export default memo(CustomDrawer);

@@ -1,7 +1,7 @@
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { memo } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import Context from '../context/ContextFactory';
@@ -33,8 +33,8 @@ const styles = theme => ({
 
 const Loading = ({ classes }) => (
   <Context.Consumer>
-    {({ state }) =>
-      state.isLoading && (
+    {({ state: { isLoading } }) =>
+      isLoading && (
         <div style={styles.LoaderElement}>
           <Paper className={classes.root} elevation={4} style={styles.Paper}>
             <CircularProgress
@@ -54,4 +54,4 @@ Loading.propTypes = {
 };
 
 export { Loading };
-export default withStyles(styles)(Loading);
+export default memo(withStyles(styles)(Loading));

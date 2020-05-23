@@ -2,7 +2,9 @@ import Adapter from 'enzyme-adapter-react-16';
 import Enzyme, { shallow } from 'enzyme';
 import React from 'react';
 
-import GeneratePages from '../generatePages';
+import { GeneratePages } from '../Page/GeneratePages';
+
+jest.mock('../../modules/File')
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -20,7 +22,7 @@ const encodedPages = [
 ];
 // const sampleData = [1, 2, 3, 4, 5].map(n => ({ width: n }));
 
-describe('generatePages', () => {
+describe('GeneratePages', () => {
   it('should render', () => {
     const wrapper = shallow(<GeneratePages encodedPages={encodedPages} />);
     expect(wrapper).toMatchSnapshot();

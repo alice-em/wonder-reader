@@ -4,6 +4,8 @@ import React from 'react';
 
 import Item from '../Table/Item';
 
+jest.mock('../../../modules/File');
+
 Enzyme.configure({ adapter: new Adapter() });
 
 const props = {
