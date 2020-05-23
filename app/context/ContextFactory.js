@@ -117,6 +117,7 @@ const ConnectContext = ({ children }) => {
       if (newPageCount === 2) {
         if (isCenterfoldsComing()) {
           setCurrentPages(currentPageIndex, 1, state);
+          return;
         }
       }
       setCurrentPages(currentPageIndex, newPageCount, state);
@@ -125,48 +126,53 @@ const ConnectContext = ({ children }) => {
 
   // OpenComic Functions
   const openComic = (fullpath) => {
-    const Comic = new File(fullpath);
-    setState({ isLoading: true });
-    Comic.extract((newOpenedComic) => {
+    const handleReadDir = newOpenedComic => (err, files) => {
+      const { pageCount } = state;
+      const generatedPages = files.map(mapPages(newOpenedComic.tempdir));
+      const pagePaths = generatedPages.map(({ pagePath }) => pagePath);
+
+      const newState = {
+        centerfolds: generateCenterfolds(pagePaths),
+        images: generateImages(generatedPages),
+        isLibraryActive: false,
+        isLoading: false,
+        openedComic: newOpenedComic,
+        pages: generatedPages,
+      };
+
+      setState(newState);
+      setCurrentPages(0, pageCount, newState);
+    };
+
+    const handleComicExtract = (newOpenedComic) => {
       if (newOpenedComic.error) {
         throwError(true, newOpenedComic.errorMessage);
       } else {
-        fs.readdir(newOpenedComic.tempdir, (err, files) => {
-          const { pageCount } = state;
-          const generatedPages = files.map(mapPages(newOpenedComic.tempdir));
-          const pagePaths = generatedPages.map(({ pagePath }) => pagePath);
-
-          const newState = {
-            centerfolds: generateCenterfolds(pagePaths),
-            images: generateImages(generatedPages),
-            isLibraryActive: false,
-            isLoading: false,
-            openedComic: newOpenedComic,
-            pages: generatedPages,
-          };
-
-          setState(newState);
-          setCurrentPages(0, pageCount, newState);
-        });
+        fs.readdir(newOpenedComic.tempdir, handleReadDir(newOpenedComic));
       }
-    });
+    };
+
+    const Comic = new File(fullpath);
+    setState({ isLoading: true });
+    Comic.extract(handleComicExtract);
   };
 
   const openAdjacentComic = (polarity) => {
     const { openedComic } = state;
+    const handleReadDir = (err, files) => {
+      const strainedComics = strainComics(files);
+      const newIndex = strainedComics.indexOf(openedComic.name) + polarity;
+      if (newIndex > -1 && newIndex < strainedComics.length) {
+        const newComicFilepath = path.join(
+          path.dirname(openedComic.origin),
+          strainedComics[newIndex],
+        );
+        openComic(newComicFilepath);
+      }
+    };
 
     if (openedComic.name !== null) {
-      fs.readdir(path.dirname(openedComic.origin), (err, files) => {
-        const strainedComics = strainComics(files);
-        const newIndex = strainedComics.indexOf(openedComic.name) + polarity;
-        if (newIndex > -1 && newIndex < strainedComics.length) {
-          const newComicFilepath = path.join(
-            path.dirname(openedComic.origin),
-            strainedComics[newIndex],
-          );
-          openComic(newComicFilepath);
-        }
-      });
+      fs.readdir(path.dirname(openedComic.origin), handleReadDir);
     }
   };
 
@@ -205,7 +211,7 @@ const ConnectContext = ({ children }) => {
       pages,
     } = state;
     if (openedComic.name.length > 0) {
-      const { newPageIndex, pagesToDisplay } = turnPage({
+      const [newPageIndex, pagesToDisplay] = turnPage({
         currentPageIndex,
         centerfolds,
         pageCount,
@@ -250,8 +256,7 @@ const ConnectContext = ({ children }) => {
     setState({ content: newContent });
   };
 
-  const updateContent = filepath =>
-    generateNestedContentFromFilepath(filepath, setContentToState);
+  const updateContent = generateNestedContentFromFilepath(setContentToState);
 
   const updateRoot = ([filepath]) => {
     if (filepath) {
@@ -279,7 +284,7 @@ const ConnectContext = ({ children }) => {
     }
   };
 
-  const keyListener = (e) => {
+  const handleKeyDown = (e) => {
     const { openedComic } = state;
     const isComicActive = openedComic.name !== null;
     const isActiveElemInput = document.activeElement.tagName === 'input';
@@ -292,9 +297,9 @@ const ConnectContext = ({ children }) => {
   };
 
   useEffect(() => {
-    window.addEventListener('keydown', keyListener);
+    window.addEventListener('keydown', handleKeyDown);
 
-    return () => window.removeEventListener('keydown', keyListener);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [state.encodedPages]);
 
   // Component Render
