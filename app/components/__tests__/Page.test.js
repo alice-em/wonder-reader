@@ -2,7 +2,9 @@ import Adapter from 'enzyme-adapter-react-16';
 import Enzyme, { shallow } from 'enzyme';
 import React from 'react';
 
-import Page from '../Page';
+import { Page } from '../Page/Page';
+
+jest.mock('../../modules/File')
 
 Enzyme.configure({ adapter: new Adapter() });
 

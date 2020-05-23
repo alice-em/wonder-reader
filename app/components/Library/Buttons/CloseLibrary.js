@@ -1,5 +1,5 @@
 import IconButton from '@material-ui/core/IconButton';
-import React from 'react';
+import React, { memo } from 'react';
 import { FaTimes } from 'react-icons/fa';
 
 import Context from '../../../context/ContextFactory';
@@ -22,4 +22,4 @@ const CloseLibrary = () => (
   </Context.Consumer>
 );
 
-export default CloseLibrary;
+export default memo(CloseLibrary);

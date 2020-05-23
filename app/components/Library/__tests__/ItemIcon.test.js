@@ -5,6 +5,8 @@ import { FaRegFolderOpen, FaRegFileArchive } from 'react-icons/fa';
 
 import ItemIcon from '../Table/ItemIcon';
 
+jest.mock('../../../modules/File');
+
 Enzyme.configure({ adapter: new Adapter() });
 
 const props = {

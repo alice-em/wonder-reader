@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 
 import * as Button from './Buttons';
@@ -19,4 +19,4 @@ const ControlBar = () => (
   </MuiThemeProvider>
 );
 
-export default ControlBar;
+export default memo(ControlBar);

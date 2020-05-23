@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { memo } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import Context from '../../context/ContextFactory';
@@ -20,24 +20,25 @@ const styles = {
   },
 };
 
-const Library = ({
-  classes,
-  style,
-}) => (
-  <Context.Consumer>
-    {({ openComic, setState, state }) => (
-      <CustomDrawer style={style}>
-        <div tabIndex={0} role="button" onKeyDown={() => setState({ isLibraryActive: false })}>
+const Library = ({ classes, style }) => (
+  <CustomDrawer style={style}>
+    <Context.Consumer>
+      {({ openComic, setState, state: { loadedLibrary } }) => (
+        <div
+          tabIndex={0}
+          role="button"
+          onKeyDown={() => setState({ isLibraryActive: false })}
+        >
           <Layout
             className={classes.list}
-            loadedLibrary={state.loadedLibrary}
+            loadedLibrary={loadedLibrary}
             openComic={openComic}
             saveContentDataToParent={content => setState({ content })}
           />
         </div>
-      </CustomDrawer>
-    )}
-  </Context.Consumer>
+      )}
+    </Context.Consumer>
+  </CustomDrawer>
 );
 
 Library.defaultProps = {
@@ -50,4 +51,4 @@ Library.propTypes = {
 };
 
 export { Library };
-export default withStyles(styles)(Library);
+export default memo(withStyles(styles)(Library));

@@ -23,4 +23,5 @@ const Header = () => (
   </AppBar>
 );
 
+export { Header };
 export default Header;

@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`generatePages should render 1`] = `
+exports[`GeneratePages should render 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <generatePages
+  Symbol(enzyme.__unrendered__): <GeneratePages
     encodedPages={
       Array [
         Object {
@@ -19,7 +19,6 @@ ShallowWrapper {
         },
       ]
     }
-    pages={Array []}
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -28,35 +27,65 @@ ShallowWrapper {
     "simulateEvent": [Function],
     "unmount": [Function],
   },
-  Symbol(enzyme.__node__): Array [
-    <Page
-      alt="comic page"
-      id="page0"
-      src="abc.png"
-      width={25}
-    />,
-    <Page
-      alt="comic page"
-      id="page1"
-      src="deb.png"
-      width={75}
-    />,
-  ],
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": [Function],
+    },
+    "ref": null,
+    "rendered": [Function],
+    "type": Object {
+      "$$typeof": Symbol(react.context),
+      "_calculateChangedBits": null,
+      "_context": Object {
+        "$$typeof": Symbol(react.context),
+        "Consumer": [Circular],
+        "Provider": Object {
+          "$$typeof": Symbol(react.provider),
+          "_context": [Circular],
+        },
+        "_calculateChangedBits": null,
+        "_currentRenderer": null,
+        "_currentRenderer2": null,
+        "_currentValue": undefined,
+        "_currentValue2": undefined,
+        "_threadCount": 0,
+        "displayName": "Context",
+      },
+    },
+  },
   Symbol(enzyme.__nodes__): Array [
-    Array [
-      <Page
-        alt="comic page"
-        id="page0"
-        src="abc.png"
-        width={25}
-      />,
-      <Page
-        alt="comic page"
-        id="page1"
-        src="deb.png"
-        width={75}
-      />,
-    ],
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": [Function],
+      },
+      "ref": null,
+      "rendered": [Function],
+      "type": Object {
+        "$$typeof": Symbol(react.context),
+        "_calculateChangedBits": null,
+        "_context": Object {
+          "$$typeof": Symbol(react.context),
+          "Consumer": [Circular],
+          "Provider": Object {
+            "$$typeof": Symbol(react.provider),
+            "_context": [Circular],
+          },
+          "_calculateChangedBits": null,
+          "_currentRenderer": null,
+          "_currentRenderer2": null,
+          "_currentValue": undefined,
+          "_currentValue2": undefined,
+          "_threadCount": 0,
+          "displayName": "Context",
+        },
+      },
+    },
   ],
   Symbol(enzyme.__options__): Object {
     "adapter": ReactSixteenAdapter {

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { memo } from 'react';
 
 const Page = ({ alt, id, src, width }) => (
   <img
@@ -20,4 +20,5 @@ Page.propTypes = {
   width: PropTypes.number.isRequired,
 };
 
-export default Page;
+export { Page };
+export default memo(Page);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import Header from './Header';
 import Table from './Table/Table';
@@ -18,4 +18,5 @@ const Layout = () => (
   </div>
 );
 
-export default Layout;
+export { Layout };
+export default memo(Layout);
