@@ -26,12 +26,11 @@ const mapPages = tempdir => (file, key) => {
   };
 };
 
-const generateImages = pages =>
-  pages.map((page) => {
-    const img = new Image();
-    img.src = page.encodedPagePath;
-    return img;
-  });
+const generateImage = (page) => {
+  const img = new Image();
+  img.src = page.encodedPagePath;
+  return img;
+};
 
 const Context = createContext();
 Context.displayName = 'Context';
@@ -41,9 +40,8 @@ const ConnectContext = ({ children }) => {
 
   // prettier-ignore
   const setState = newState => updateState(currentState => ({ ...currentState, ...newState }));
-  // // prettier-ignore
-  // const setState = newState =>
-  //   updateState(currentState => {
+  // prettier-ignore
+  // const setState = newState => updateState(currentState => {
   //     console.log('currentState', currentState);
   //     console.log('newState', newState);
   //
@@ -108,19 +106,23 @@ const ConnectContext = ({ children }) => {
   };
 
   // ChangePageCount Function
-  const changePageCount = () => {
-    const { currentPageIndex, openedComic, pageCount } = state;
+  const togglePageCount = () => {
+    const { pageCount } = state;
     const newPageCount = pageCount === 2 ? 1 : 2;
+    setState({ pageCount: newPageCount });
+    return newPageCount;
+  };
+  const changePageCount = () => {
+    const { currentPageIndex, openedComic } = state;
+    const newPageCount = togglePageCount();
 
     if (openedComic.name !== null) {
-      setState({ pageCount: newPageCount });
-      if (newPageCount === 2) {
-        if (isCenterfoldsComing()) {
-          setCurrentPages(currentPageIndex, 1, state);
-          return;
-        }
-      }
-      setCurrentPages(currentPageIndex, newPageCount, state);
+      const overridePageCountCondition =
+        newPageCount === 2 && isCenterfoldsComing();
+      const overriddenPageCountValue = overridePageCountCondition
+        ? 1
+        : newPageCount;
+      setCurrentPages(currentPageIndex, overriddenPageCountValue, state);
     }
   };
 
@@ -133,7 +135,7 @@ const ConnectContext = ({ children }) => {
 
       const newState = {
         centerfolds: generateCenterfolds(pagePaths),
-        images: generateImages(generatedPages),
+        images: generatedPages.map(generateImage),
         isLibraryActive: false,
         isLoading: false,
         openedComic: newOpenedComic,
