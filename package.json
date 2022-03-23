@@ -194,7 +194,7 @@
     "jest": "^23.1.0",
     "js-yaml": "^3.13.1",
     "lint-staged": "7.1.3",
-    "minimist": "1.2.3",
+    "minimist": "1.2.6",
     "mkdirp": "0.5.1",
     "node-unrar": "0.1.5",
     "npm-logical-tree": "1.2.1",
